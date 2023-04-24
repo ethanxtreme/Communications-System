@@ -134,4 +134,11 @@ public class User {
 	}
 	
 	
+	// for debugging only
+	public void printGroups() {
+		for (int i=0; i<numGroups; i++) {
+			System.out.println(chatGroups[i]);
+		}
+	}
+	
 }
