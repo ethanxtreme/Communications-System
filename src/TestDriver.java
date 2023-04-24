@@ -23,6 +23,7 @@ public class TestDriver {
 		System.out.println("ID, USERNAME, USERTYPE, PASSWORD, GROUPS");
 		System.out.println(testUser.getId() + " " + testUser.getUsername() + " " + testUser.getType() + " " +  
 							testUser.getPassword() + ", " + "Groups:");
+		testUser.printGroups();
 		
 //		System.out.println();
 //		System.out.println();
