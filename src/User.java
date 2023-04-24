@@ -9,6 +9,7 @@ public class User {
 	private UserType userType;
 	private String password;
 	private ChatGroup[] chatGroups;
+	private int numGroups;
 	
 	// default constructor
 	public User() {
@@ -17,6 +18,7 @@ public class User {
 		userType = UserType.USER; 
 		password = "";
 		chatGroups = new ChatGroup[DEFAULT_GROUPS];
+		numGroups = 0;
 	}
 	
 	public User(String userId, String username, UserType userType, String password, ChatGroup[] chatGroups) {
@@ -25,7 +27,53 @@ public class User {
 		this.userType = userType;
 		this.password = password;
 		this.chatGroups = chatGroups;
+		
+		// count the number of groups
+		for (int i=0; i<chatGroups.length; i++) {
+			if (chatGroups[i] == null) {
+				break;
+			}
+			numGroups++;
+		}
 	}
+	
+	// setters
+	
+	public void setId(String id) {
+		userId = id;
+	}
+	
+	public void setUsername(String name) {
+		username = name;
+	}
+	
+	public void setType(UserType type) {
+		userType = type;
+	}
+	
+	public void setPassword(String pass) {
+		password = pass;
+	}
+	
+	// method here for adding a ChatGroup to chatGroups[]
+	public void addGroup(ChatGroup group) {
+		
+		// rehash group if numGroups = size
+		if (numGroups == chatGroups.length) {
+			ChatGroup[] newGroupArray = new ChatGroup[chatGroups.length*2];
+			
+			for (int i=0; i<numGroups; i++) {
+				newGroupArray[i] = chatGroups[i];
+			}
+			
+			chatGroups = newGroupArray;
+		}
+		
+		// add the new group
+		chatGroups[numGroups] = group;
+		numGroups++;
+	}
+	
 	
 	public void login(String userId, String password) {
 		
@@ -60,5 +108,6 @@ public class User {
 		// TODO debug message
 		System.out.println("View Logs successfully called.");
 	}
+	
 	
 }
