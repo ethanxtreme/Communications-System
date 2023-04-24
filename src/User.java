@@ -109,7 +109,7 @@ public class User {
 	public void message(NetworkMessage message, String recipientUsername) { 
 		
 		// TODO debug message
-		System.out.println("Message reading \"" + message + "\" sent to " + recipientUsername);
+		System.out.println("Message reading \"" + message.getText() + "\" sent to " + recipientUsername);
 	}
 	
 	public ChatGroup createGroup(User[] users, String name) {
