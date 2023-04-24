@@ -74,6 +74,28 @@ public class User {
 		numGroups++;
 	}
 	
+	// getters
+	
+	public String getId() {
+		return userId;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public UserType getType() {
+		return userType;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public ChatGroup[] getGroups() {
+		return chatGroups;
+	}
+	
 	
 	public void login(String userId, String password) {
 		
