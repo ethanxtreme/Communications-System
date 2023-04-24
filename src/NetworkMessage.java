@@ -6,6 +6,8 @@ public class NetworkMessage implements Serializable {
 	protected MessageType type;
 	
 	protected String messageText;
+	
+	protected ChatMessage chatMessage;
 	/*
 	 * I dont think passing a string here is best
 	 * I think that if we pass an additional object of type ChatMessage 
@@ -50,4 +52,7 @@ public class NetworkMessage implements Serializable {
     	return this.messageText;
     }
     
+    public ChatMessage getChatMessage() {
+    	return this.chatMessage;
+    }
 }
