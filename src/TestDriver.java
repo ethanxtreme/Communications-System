@@ -14,7 +14,8 @@ public class TestDriver {
 //			temp = "Group" + Integer.toString(i);
 //			testGroups[i] = new ChatGroup(temp);
 //		}
-		NetworkMessage testMsg = new NetworkMessage(MessageType.TEXT, MessageStatus.DELIVERED, "Hello There!");
+		ChatMessage testMsg = new ChatMessage("Hello There!");
+		// this uses network message for now because chat message is not complete yet
 		
 		System.out.println("Creating default user (no output)");
 		defaultUser = new User();
