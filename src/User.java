@@ -99,17 +99,17 @@ public class User {
 	}
 	
 	
-	public void login(String userId, String password) {
+	public void login(String password) {
 		
 		// TODO debug message
-		System.out.println("Login with userID: " + userId + " and password " + password);
+		System.out.println("Login with password " + password);
 	}
 	
 	// return type may need to be NetworkMessage, but for now void seems to make more sense
 	public void message(NetworkMessage message, String recipientUsername) { 
 		
 		// TODO debug message
-		System.out.println("Message reading \"" + message + "\" sent to " + recipientUsername);
+		System.out.println("Message reading \"" + message.getText() + "\" sent to " + recipientUsername);
 	}
 	
 	public ChatGroup createGroup(User[] users, String name) {

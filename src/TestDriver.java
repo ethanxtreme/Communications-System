@@ -10,9 +10,11 @@ public class TestDriver {
 		User defaultUser;
 		User testUser;
 		ChatGroup[] testGroups = new ChatGroup[8];
-		for (int i=0; i<5; i++) {
-			temp = "Group" + Integer.toString(i);
-		}
+//		for (int i=0; i<5; i++) {
+//			temp = "Group" + Integer.toString(i);
+//			testGroups[i] = new ChatGroup(temp);
+//		}
+		NetworkMessage testMsg = new NetworkMessage(MessageType.TEXT, MessageStatus.DELIVERED, "Hello There!");
 		
 		System.out.println("Creating default user (no output)");
 		defaultUser = new User();
@@ -23,13 +25,20 @@ public class TestDriver {
 		System.out.println("ID, USERNAME, USERTYPE, PASSWORD, GROUPS");
 		System.out.println(testUser.getId() + " " + testUser.getUsername() + " " + testUser.getType() + " " +  
 							testUser.getPassword() + ", " + "Groups:");
+//		testUser.printGroups();
 		
-//		System.out.println();
-//		System.out.println();
-//		System.out.println();
-//		System.out.println();
+		System.out.println("Testing Login:");
+		testUser.login("Password777");
+		
+		System.out.println("Testing Message:");
+		testUser.message(testMsg, "User2");
+		
+//		System.out.println("Testing CreateGroup: ");
+		
+		System.out.println("Testing ViewLogs:");
+		testUser.viewLogs();
 //		
-		//  END TESTING user.java FUNCTION  //
+		//  END TESTING user.java FUNCTIONS  //
 
 	}
 
