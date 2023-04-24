@@ -29,6 +29,8 @@ public class User {
 		this.chatGroups = chatGroups;
 		
 		// count the number of groups
+		numGroups = 0;
+		
 		for (int i=0; i<chatGroups.length; i++) {
 			if (chatGroups[i] == null) {
 				break;
