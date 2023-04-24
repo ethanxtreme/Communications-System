@@ -106,7 +106,7 @@ public class User {
 	}
 	
 	// return type may need to be NetworkMessage, but for now void seems to make more sense
-	public void message(NetworkMessage message, String recipientUsername) { 
+	public void message(ChatMessage message, String recipientUsername) { 
 		
 		// TODO debug message
 		System.out.println("Message reading \"" + message.getText() + "\" sent to " + recipientUsername);
