@@ -35,9 +35,11 @@ public class Server {
 
     private static class CommunicationsServer implements Runnable {
         private Socket socket;
+        private ChatLog chatLog;
 
         CommunicationsServer(Socket socket) {
             this.socket = socket;
+            this.chatLog = chatLog;
         }
 
         @Override
@@ -64,6 +66,7 @@ public class Server {
 	                	
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
+	                	//save message to chat log i.e chatLog.saveMessage(message.getChatMessage());
 	                	
 	                	//create some sort of array or list of users that the message 
 	                	//needs to be sent to. i.e User[] UserArray = message.getChatMessage().getUsers();
