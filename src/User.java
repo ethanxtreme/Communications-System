@@ -6,7 +6,7 @@ public class User {
 	
 	private String userId;
 	private String username;
-//	private UserType usertype;
+	private UserType userType;
 	private String password;
 	private ChatGroup[] chatGroups;
 	
@@ -19,10 +19,10 @@ public class User {
 		chatGroups = new ChatGroup[DEFAULT_GROUPS];
 	}
 	
-	public User(userId, username, userType password, chatGroups) {
+	public User(String userId, String username, UserType userType, String password, Chatgroup[] chatGroups) {
 		this.userId = userId;
 		this.username = username;
-		this.usertype = userType;
+		this.userType = userType;
 		this.password = password;
 		this.chatGroups = chatGroups;
 	}
