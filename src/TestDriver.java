@@ -14,7 +14,7 @@ public class TestDriver {
 //			temp = "Group" + Integer.toString(i);
 //			testGroups[i] = new ChatGroup(temp);
 //		}
-		ChatMessage testMsg = new ChatMessage("Hello There!");
+		// ChatMessage testMsg = new ChatMessage("Hello There!");
 		// this uses network message for now because chat message is not complete yet
 		
 		System.out.println("Creating default user (no output)");
@@ -32,7 +32,7 @@ public class TestDriver {
 		testUser.login("Password777");
 		
 		System.out.println("Testing Message:");
-		testUser.message(testMsg, "User2");
+		// testUser.message(testMsg, "User2");
 		
 //		System.out.println("Testing CreateGroup: ");
 		

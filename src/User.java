@@ -1,15 +1,13 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class User {
-
-	// default value for number of chat groups allowed at first
-	private final int DEFAULT_GROUPS = 8;
-	
+	// Fields
 	private String userId;
 	private String username;
 	private UserType userType;
 	private String password;
-	private ChatGroup[] chatGroups;
-	private int numGroups;
+	ArrayList<Thread> Threads = new ArrayList<>();
 	
 	// default constructor
 	public User() {
@@ -17,30 +15,16 @@ public class User {
 		username = "";
 		userType = UserType.USER; 
 		password = "";
-		chatGroups = new ChatGroup[DEFAULT_GROUPS];
-		numGroups = 0;
 	}
 	
-	public User(String userId, String username, UserType userType, String password, ChatGroup[] chatGroups) {
+	public User(String userId, String username, UserType userType, String password) {
 		this.userId = userId;
 		this.username = username;
 		this.userType = userType;
 		this.password = password;
-		this.chatGroups = chatGroups;
-		
-		// count the number of groups
-		numGroups = 0;
-		
-		for (int i=0; i<chatGroups.length; i++) {
-			if (chatGroups[i] == null) {
-				break;
-			}
-			numGroups++;
-		}
 	}
 	
 	// setters
-	
 	public void setId(String id) {
 		userId = id;
 	}
@@ -57,27 +41,7 @@ public class User {
 		password = pass;
 	}
 	
-	// method here for adding a ChatGroup to chatGroups[]
-	public void addGroup(ChatGroup group) {
-		
-		// rehash group if numGroups = size
-		if (numGroups == chatGroups.length) {
-			ChatGroup[] newGroupArray = new ChatGroup[chatGroups.length*2];
-			
-			for (int i=0; i<numGroups; i++) {
-				newGroupArray[i] = chatGroups[i];
-			}
-			
-			chatGroups = newGroupArray;
-		}
-		
-		// add the new group
-		chatGroups[numGroups] = group;
-		numGroups++;
-	}
-	
 	// getters
-	
 	public String getId() {
 		return userId;
 	}
@@ -94,10 +58,6 @@ public class User {
 		return password;
 	}
 	
-	public ChatGroup[] getGroups() {
-		return chatGroups;
-	}
-	
 	
 	public void login(String password) {
 		
@@ -109,19 +69,7 @@ public class User {
 	public void message(ChatMessage message, String recipientUsername) { 
 		
 		// TODO debug message
-		System.out.println("Message reading \"" + message.getText() + "\" sent to " + recipientUsername);
-	}
-	
-	public ChatGroup createGroup(User[] users, String name) {
-		
-		// TODO debug message
-		System.out.print("Group named \"" + name + "\" created with users:");
-		for (int i=0; i<users.length; i++) {
-			if (users[i] == null) {break;}
-			System.out.println(users[i]);
-		}
-		
-		return null;
+		System.out.println("Message reading \"" + message.getMessageText() + "\" sent to " + recipientUsername);
 	}
 	
 	// should only be accessible if user is an ADMIN
@@ -133,12 +81,5 @@ public class User {
 		System.out.println("View Logs successfully called.");
 	}
 	
-	
-	// for debugging only
-	public void printGroups() {
-		for (int i=0; i<numGroups; i++) {
-			System.out.println(chatGroups[i]);
-		}
-	}
 	
 }
