@@ -1,4 +1,3 @@
-
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +24,9 @@ public class Thread {
 		numMessages = chatMessages.size();
 	}
 	
+	
 	// other methods
+	
 	public void addMessage(ChatMessage message) {
 		// Add the new message to the end of the array
 	    chatMessages.add(message);
