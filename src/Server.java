@@ -32,7 +32,7 @@ public class Server {
             //load in user data and chatlog data data from files
             FileServer fileServer = new FileServer();
             ArrayList<User> users = fileServer.loadUsers();
-            ArrayList<Thread> chatLog = fileServer.loadChatLog();
+            ArrayList<Thread> chatLog = fileServer.loadChatLog(users);
             while (true) {
                 pool.execute(new CommunicationsServer(listener.accept(), users, chatLog));
             }
