@@ -70,5 +70,26 @@ public class FileServer {
         // Return the threads list
         return threads;
     }
-	    
+    
+    
+    // Save users to Users.txt file
+    public void saveUsers(ArrayList<User> users) {
+        // Write users data to Users.txt file
+        try (PrintWriter pw = new PrintWriter(new FileWriter(USERS_FILE))) {
+            for (User user : users) {
+                pw.println(
+                        user.getId() + "," +
+                        user.getUsername() + "," +
+                        user.getType() + "," +
+                        user.getPassword() + "," +
+                        user.isAdmin()
+                );
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+       
 }
