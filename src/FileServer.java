@@ -48,7 +48,7 @@ public class FileServer {
         try (BufferedReader br = new BufferedReader(new FileReader(THREADS_FILE))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Split chat messages by a delimiter, for example: '|'
+                // Split chat messages by a delimiter
                 String[] chatMessageData = line.split("\\|");
                 ArrayList<ChatMessage> messagesList = new ArrayList<>();
                 for (String messageData : chatMessageData) {
@@ -89,6 +89,35 @@ public class FileServer {
             e.printStackTrace();
         }
     }
+    
+    
+    // Save chat log to Threads.txt file
+    public void saveChatLog(ArrayList<Thread> chatLog) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        // Write the chat log to the Threads.txt file
+        try (PrintWriter pw = new PrintWriter(new FileWriter(THREADS_FILE))) {
+            for (Thread thread : chatLog) {
+                StringBuilder messages = new StringBuilder();
+                for (ChatMessage message : thread.getThread()) {
+                    messages.append(message.getMessageId()).append(",")
+                            .append(message.getSenderId()).append(",")
+                            .append(String.join(";", message.getRecipientIds())).append(",")
+                            .append(message.getMessageText()).append(",")
+                            .append(dateFormat.format(message.getTimeStamp())).append("|");
+                }
+                // Remove the last delimiter '|' before writing to the file
+                if (messages.length() > 0) {
+                    messages.setLength(messages.length() - 1);
+                }
+                // Write the concatenated chat messages to the file
+                pw.println(messages.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     
     
        
