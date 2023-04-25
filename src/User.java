@@ -7,7 +7,9 @@ public class User {
 	private String username;
 	private UserType userType;
 	private String password;
-	ArrayList<Thread> Threads = new ArrayList<>();
+	private ArrayList<Thread> Threads = new ArrayList<>();
+	private boolean admin;
+	
 	
 	// default constructor
 	public User() {
@@ -15,6 +17,7 @@ public class User {
 		username = "";
 		userType = UserType.USER; 
 		password = "";
+		admin = false;
 	}
 	
 	public User(String userId, String username, UserType userType, String password) {
@@ -41,6 +44,10 @@ public class User {
 		password = pass;
 	}
 	
+	public void setAdmin() {
+		admin = true;
+	}
+	
 	// getters
 	public String getId() {
 		return userId;
@@ -56,6 +63,10 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public boolean isAdmin() {
+		return admin;
 	}
 	
 	
