@@ -8,6 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
+import java.util.ArrayList;
+
 
 
 /**
@@ -23,24 +25,31 @@ public class Server {
      * Runs the sever, spawns new thread with client connection returns to listening
      * limits number of threads via thread pool, set to 100 for now
      */
-    public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
         try (var listener = new ServerSocket(1234)) {
             System.out.println("The Communications Server is running...");
             var pool = Executors.newFixedThreadPool(100);
+            //load in user data and chatlog data data from files
+            FileServer fileServer = new FileServer();
+            ArrayList<User> users = fileServer.loadUsers();
+            ArrayList<Thread> chatLog = fileServer.loadChatLog();
             while (true) {
-                pool.execute(new CommunicationsServer(listener.accept()));
+                pool.execute(new CommunicationsServer(listener.accept(), users, chatLog));
             }
         }
     }
-
+	
     private static class CommunicationsServer implements Runnable {
         private Socket socket;
         private ChatLog chatLog = new ChatLog();
+        private ArrayList<User> users;
+        private ArrayList<Thread> threads;
 
-        CommunicationsServer(Socket socket) {
+        CommunicationsServer(Socket socket, ArrayList<User> users, ArrayList<Thread> chatLog) {
             this.socket = socket;
+            this.users = users;
+            this.threads = chatLog;
         }
-
         @Override
         public void run() {
             System.out.println("Connected: " + socket);
@@ -59,6 +68,7 @@ public class Server {
                 	
 	                if(message.getType() == MessageType.LOGIN) {
 	                	//Validate login, send login success message to client to authenticate login
+	                		                	
 	                	NetworkMessage successMessage = new NetworkMessage();
 	                	successMessage.setStatus(MessageStatus.SUCCESS);
 	                	objectOutputStream.writeObject(successMessage);
@@ -104,6 +114,11 @@ public class Server {
                 System.out.println("Closed: " + socket);
             }
         }
+    }
+    
+    public void login(String username, String password) throws IOException {
+        // add validation logic for username and password
+        
     }
     
 }
