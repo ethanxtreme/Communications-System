@@ -7,7 +7,7 @@ public class User {
 	private String username;
 	private UserType userType;
 	private String password;
-	private ArrayList<Thread> Threads = new ArrayList<>();
+	private ArrayList<Thread> threads = new ArrayList<>();
 	private boolean admin;
 	
 	
@@ -65,6 +65,10 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	
+	public ArrayList<Thread> getThreads() {
+        return threads;
+    }
 	
 	public boolean isAdmin() {
 		return admin;

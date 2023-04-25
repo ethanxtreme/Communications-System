@@ -40,35 +40,57 @@ public class FileServer {
     }
     
     // Load chat log from Threads.txt file
-    public ArrayList<Thread> loadChatLog() {
-        ArrayList<Thread> threads = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-        // Read the Threads.txt file
-        try (BufferedReader br = new BufferedReader(new FileReader(THREADS_FILE))) {
+    public ArrayList<Thread> loadChatLog(ArrayList<User> users) {
+        ArrayList<Thread> chatLog = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("Threads.txt"))) {
             String line;
+            Thread currentThread = null;
             while ((line = br.readLine()) != null) {
-                // Split chat messages by a delimiter
-                String[] chatMessageData = line.split("\\|");
-                ArrayList<ChatMessage> messagesList = new ArrayList<>();
-                for (String messageData : chatMessageData) {
-                    String[] messageFields = messageData.split(",");
-                    String messageId = messageFields[0];
-                    String senderId = messageFields[1];
-                    String[] recipientIds = messageFields[2].split(";");
-                    String messageText = messageFields[3];
-                    Date timeStamp = dateFormat.parse(messageFields[4]);
+                String[] parts = line.split("\\|");
+                if (parts.length == 2) {
+                    // When a new line with two '|' characters is encountered, it indicates the start of a new thread
+                    if (currentThread != null) {
+                        // Add the previous thread to the chatLog list
+                        chatLog.add(currentThread);
+                    }
+                    // Create a new Thread instance for the next thread
+                    currentThread = new Thread();
+                } else {
+                    // Split the line into fields and parse the ChatMessage fields
+                    String[] fields = line.split(",");
+                    String messageId = fields[0];
+                    String senderId = fields[1];
+                    String[] recipientIds = fields[2].substring(1, fields[2].length() - 1).split("\\s*,\\s*");
+                    String messageText = fields[3];
+                    Date timeStamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(fields[4]);
 
-                    messagesList.add(new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp));
+                    // Create a new ChatMessage instance with the parsed fields
+                    ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);
+                    currentThread.addMessage(chatMessage);
+
+                    // Add the thread to the User objects
+                    // Find the sender and add the currentThread to their threads list if not already present
+                    User sender = findUserById(senderId, users);
+                    if (sender != null && !sender.getThreads().contains(currentThread)) {
+                        sender.getThreads().add(currentThread);
+                    }
+                    // Find the recipients and add the currentThread to their threads list if not already present
+                    for (String recipientId : recipientIds) {
+                        User recipient = findUserById(recipientId, users);
+                        if (recipient != null && !recipient.getThreads().contains(currentThread)) {
+                            recipient.getThreads().add(currentThread);
+                        }
+                    }
                 }
-                // Add the new Thread to the threads list
-                threads.add(new Thread(messagesList.toArray(new ChatMessage[0])));
+            }
+            // Add the last thread to the chatLog list
+            if (currentThread != null) {
+                chatLog.add(currentThread);
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        // Return the threads list
-        return threads;
+        return chatLog;
     }
     
     
@@ -119,6 +141,16 @@ public class FileServer {
     }
     
     
+    // HELPER FUNCTIONS
     
+    // Find a User object based on the user ID
+    private User findUserById(String userId, ArrayList<User> users) {
+        for (User user : users) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
+    }
        
 }
