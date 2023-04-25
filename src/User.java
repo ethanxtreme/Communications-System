@@ -25,6 +25,7 @@ public class User {
 		this.username = username;
 		this.userType = userType;
 		this.password = password;
+		admin = false;
 	}
 	
 	// setters
