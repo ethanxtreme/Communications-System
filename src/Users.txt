@@ -1,0 +1,2 @@
+user_id, username, user_type, password
+0001, ethanneves, admin, 1234abc
