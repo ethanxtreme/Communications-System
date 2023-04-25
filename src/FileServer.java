@@ -1,5 +1,8 @@
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.ParseException;
 
 public class FileServer {
     
@@ -35,3 +38,37 @@ public class FileServer {
         // Return the users list
         return users;
     }
+    
+    // Load chat log from Threads.txt file
+    public ArrayList<Thread> loadChatLog() {
+        ArrayList<Thread> threads = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        // Read the Threads.txt file
+        try (BufferedReader br = new BufferedReader(new FileReader(THREADS_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Split chat messages by a delimiter, for example: '|'
+                String[] chatMessageData = line.split("\\|");
+                ArrayList<ChatMessage> messagesList = new ArrayList<>();
+                for (String messageData : chatMessageData) {
+                    String[] messageFields = messageData.split(",");
+                    String messageId = messageFields[0];
+                    String senderId = messageFields[1];
+                    String[] recipientIds = messageFields[2].split(";");
+                    String messageText = messageFields[3];
+                    Date timeStamp = dateFormat.parse(messageFields[4]);
+
+                    messagesList.add(new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp));
+                }
+                // Add the new Thread to the threads list
+                threads.add(new Thread(messagesList.toArray(new ChatMessage[0])));
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        // Return the threads list
+        return threads;
+    }
+	    
+}
