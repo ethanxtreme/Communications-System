@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class Thread {
 	
-	private final int DEFAULT_MESSAGES = 20;
 	private int numMessages;
 	
 	// array of messages
@@ -16,8 +15,6 @@ public class Thread {
 	}
 	
 	public Thread(ChatMessage[] messages) {
-		
-		
 		chatMessages.addAll(Arrays.asList(messages));
 		
 		// this will save the current number of messages
@@ -27,13 +24,14 @@ public class Thread {
 	
 	// other methods
 	
+	// Add new message to my TV
 	public void addMessage(ChatMessage message) {
 		// Add the new message to the end of the array
 	    chatMessages.add(message);
 	    
 	    // Increment the number of messages
 	    numMessages++;
-	}
+	}	
 	
 	// returns number of messages in thread
 	public int getNumMessages() {

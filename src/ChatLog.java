@@ -1,24 +1,23 @@
 import java.util.*;
 
 public class ChatLog {
-	public List<ChatMessage> chatLog;
-	public int numMessages;
+	public List<Thread> chatLog;
+	public int numThreads;
 	
-	
+	// Constructor
 	public ChatLog() { 
-		numMessages = 0;
-		chatLog = new ArrayList<ChatMessage>();
+		chatLog = new ArrayList<Thread>();
+		numThreads = 0;
 	}
 	
-	private void WriteChat(ChatMessage message, ChatMessage id, ChatMessage timeStamps) {
-		chatLog.add(message);
-		chatLog.add(id);
-		chatLog.add(timeStamps);
-		numMessages++;
-		
+	// Add new thread to chat log
+	private void addToLog(Thread thread) {
+		chatLog.add(thread);
+		numThreads++;
 	}
 	
-	private List<ChatMessage> readChat() {
+	
+	private List<Thread> getLog() {
 		return chatLog;
 	}
 

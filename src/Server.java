@@ -35,11 +35,10 @@ public class Server {
 
     private static class CommunicationsServer implements Runnable {
         private Socket socket;
-        private ChatLog chatLog;
+        private ChatLog chatLog = new ChatLog();
 
         CommunicationsServer(Socket socket) {
             this.socket = socket;
-            this.chatLog = chatLog;
         }
 
         @Override
