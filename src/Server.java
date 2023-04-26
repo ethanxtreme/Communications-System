@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 
@@ -88,12 +89,35 @@ public class Server {
 	                	
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
-	                	//save message to chat log i.e chatLog.saveMessage(message.getChatMessage());
 	                	
-	                	//create some sort of array or list of users that the message 
-	                	//needs to be sent to. i.e User[] UserArray = message.getChatMessage().getUsers();
+	                	// Get the recipient list from the message
+	                	String[] recipients = message.getChatMessage().getRecipientIds();
+
+	                	// Check if the thread already exists
+	                	Thread existingThread = null;
+	                	for (int i = 0; i < chatLog.getLog().size(); i++) {
+	                	    Thread thread = chatLog.getLog().get(i);
+	                	    String[] threadRecipients = thread.getRecipientIds();
+	                	    if (Arrays.equals(threadRecipients, recipients)) { //not sure if this is the right check
+	                	        existingThread = thread;
+	                	        break;
+	                	    }
+	                	}
+
+	                	if (existingThread == null) {
+	                	    // If the thread doesn't exist, create a new thread and add it to the chat log
+	                	    Thread newThread = new Thread();
+	                	    newThread.addMessage(message.getChatMessage());
+	                	    chatLog.addToLog(newThread);
+
+	                	} else {
+	                	    // If the thread already exists, add the message to the existing thread
+	                	    existingThread.addMessage(message.getChatMessage());
+	                	    // Update the chat log with the modified thread
+	                	    modifyLog(existingThread); //this method does not exist yet
+	                	}
+
 	                	//then send the text in the chatmessage to appropriate users
-	                	//will also have to save messages to chatlog as a thread at some point
 	                	NetworkMessage toSend = new NetworkMessage();
 	                	toSend.setType(MessageType.TEXT);
 	                	toSend.setStatus(MessageStatus.SUCCESS);
