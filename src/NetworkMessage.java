@@ -8,6 +8,7 @@ public class NetworkMessage implements Serializable {
 	protected String messageText;
 	
 	protected ChatMessage chatMessage;
+	protected String loginCredentials;
 	/*
 	 * I dont think passing a string here is best
 	 * I think that if we pass an additional object of type ChatMessage 
@@ -34,6 +35,14 @@ public class NetworkMessage implements Serializable {
 
     public void setStatus(MessageStatus status){
     	this.status = status;
+    }
+    
+    public void setLoginCredentials(String loginCredentials) {
+        this.loginCredentials = loginCredentials;
+    }
+    
+    public String getLoginCredentials() {
+        return loginCredentials;
     }
 
     public void setText(String text){

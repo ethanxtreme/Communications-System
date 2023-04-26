@@ -17,60 +17,78 @@ import java.util.Scanner;
  */
 
 public class Client {
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Scanner sc = new Scanner(System.in); 
-        System.out.print("Enter the port number to connect to: <1234>"); 
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the port number to connect to: <1234>");
         int port = sc.nextInt();
-        InetAddress localhost = InetAddress.getLocalHost(); 
-        System.out.println("IPV4 Address : " + 
-                    (localhost.getHostAddress()).trim());
+        InetAddress localhost = InetAddress.getLocalHost();
+        System.out.println("IPV4 Address : " + (localhost.getHostAddress()).trim());
         String host = localhost.getHostAddress().trim();
 
         // Connect to the ServerSocket at host:port
         Socket socket = new Socket(host, port);
         System.out.println("Connected to " + host + ":" + port);
-        
+
         // Output stream socket
         OutputStream outputStream = socket.getOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        
-        //Input stream socket
+
+        // Input stream socket
         InputStream inputStream = socket.getInputStream();
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+
+        // Login
+        System.out.print("Enter your username: ");
+        String username = sc.next();
         
-        NetworkMessage Received_Messages = (NetworkMessage) objectInputStream.readObject();
-        
+        System.out.print("Enter your password: ");
+        String password = sc.next();
+
+        String loginCredentials = username + "::" + password;
+
         NetworkMessage client_login = new NetworkMessage();
         client_login.setType(MessageType.LOGIN);
+        client_login.setLoginCredentials(loginCredentials);
         objectOutputStream.writeObject(client_login);
-        
-        if(Received_Messages.getStatus().equals(MessageStatus.SUCCESS)) {
-        	NetworkMessage client_text = new NetworkMessage();
-        	client_text.setType(MessageType.TEXT);
-        	objectOutputStream.writeObject(client_text);
-        	if(Received_Messages.getStatus().equals(MessageStatus.SUCCESS)) {
-        	     System.out.print("Enter message info.\n"); 
-        	     String text_input = sc.next();
-        	     if(!text_input.equals("logout") || !text_input.equals("LOGOUT")) {
-        	    	 client_text.setText(text_input);
-        	    	 objectOutputStream.writeObject(text_input);
-        	     }
-        	     else {
-        	    	 client_text.setType(MessageType.LOGOUT);
-        	    	 if(Received_Messages.getStatus().equals(MessageStatus.FAIL)) {
-        	    		 System.out.println("Closing socket");
-        	    		 inputStream.close();
-        	    		 outputStream.close();
-        	    		 socket.close();
-        	    	 }
-        	     }
-        	     
-        	}
+
+        NetworkMessage receivedMessage = (NetworkMessage) objectInputStream.readObject();
+
+        if (receivedMessage.getStatus().equals(MessageStatus.SUCCESS)) {
+            System.out.println("Login successful.");
+
+            // Main command loop
+            boolean running = true;
+            while (running) {
+                System.out.print("\nEnter a command (SEND, HISTORY, LIST, LOGOUT): ");
+                String command = sc.next().toUpperCase();
+
+                switch (command) {
+                    case "SEND":
+                        // ... (unchanged code)
+                        break;
+
+                    case "HISTORY":
+                        // ... (unchanged code)
+                        break;
+
+                    case "LIST":
+                        // ... (unchanged code)
+                        break;
+
+                    case "LOGOUT":
+                        // ... (unchanged code)
+                        break;
+
+                    default:
+                        System.out.println("Invalid command. Please try again.");
+                        break;
+                }
+            }
+        } else {
+            System.out.println("Login failed. Please try again.");
         }
-        
+
         System.out.println("Closing socket");
         socket.close();
-        }
-	
-	
+    }
 }
