@@ -167,17 +167,11 @@ public class Server {
         }
         return false;
     	
-    }
+    }		
 
-<<<<<<< Updated upstream
-	public static void login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
-		String credentials = message.getLoginCredentials();
-    	String[] fields = credentials.split("::"); //stored as: username::password
-=======
     public static User login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
-        String data = message.getChatMessage().getMessageText();
-        String[] fields = data.split(",");
->>>>>>> Stashed changes
+    	String credentials = message.getLoginCredentials();
+    	String[] fields = credentials.split("::"); //stored as: username::password
         String username = fields[0];
         String password = fields[1];
 
