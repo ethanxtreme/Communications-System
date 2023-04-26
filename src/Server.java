@@ -69,24 +69,8 @@ public class Server {
                 	
 	                if(message.getType() == MessageType.LOGIN) {
 	                	//Validate login, send login success message to client to authenticate login
-	                	
-	                	String data = message.getChatMessage().getMessageText();
-	                	String[] fields = data.split(",");
-	                    String username = fields[0];
-	                    String password = fields[1];
-	                    
-	                	Boolean authenticate = login(users, username, password);
-	                	
-	                	if(authenticate.equals(true)) {
-	                		NetworkMessage successMessage = new NetworkMessage();
-		                	successMessage.setStatus(MessageStatus.SUCCESS);
-		                	objectOutputStream.writeObject(successMessage);
-	                	} else {
-	                		NetworkMessage failMessage = new NetworkMessage();
-		                	failMessage.setStatus(MessageStatus.FAIL);
-		                	objectOutputStream.writeObject(failMessage);
-	                	}
-	                	
+	                	login(message, objectOutputStream, users);
+	        
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
 	                	
@@ -153,7 +137,7 @@ public class Server {
         }
     }
     
-    public static Boolean login(ArrayList<User> users, String username, String password) throws IOException {
+    public static Boolean authenticate(ArrayList<User> users, String username, String password) throws IOException {
     	
     	for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
@@ -163,5 +147,25 @@ public class Server {
         return false;
     	
     }
+
+	public static void login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
+		String data = message.getChatMessage().getMessageText();
+    	String[] fields = data.split(",");
+        String username = fields[0];
+        String password = fields[1];
+        
+    	Boolean authenticate = authenticate(users, username, password);
+    	
+    	if(authenticate.equals(true)) {
+    		NetworkMessage successMessage = new NetworkMessage();
+        	successMessage.setStatus(MessageStatus.SUCCESS);
+        	objectOutputStream.writeObject(successMessage);
+    	} else {
+    		NetworkMessage failMessage = new NetworkMessage();
+        	failMessage.setStatus(MessageStatus.FAIL);
+        	objectOutputStream.writeObject(failMessage);
+    	}
+		
+	}
     
 }
