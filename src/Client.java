@@ -37,58 +37,68 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
-        // Login
+        NetworkMessage receivedMessage;
+
+        // User login
         System.out.print("Enter your username: ");
         String username = sc.next();
-        
         System.out.print("Enter your password: ");
         String password = sc.next();
 
-        String loginCredentials = username + "::" + password;
+        NetworkMessage loginMessage = new NetworkMessage();
+        loginMessage.setType(MessageType.LOGIN);
+        loginMessage.setLoginCredentials(username + "|" + password);
+        objectOutputStream.writeObject(loginMessage);
 
-        NetworkMessage client_login = new NetworkMessage();
-        client_login.setType(MessageType.LOGIN);
-        client_login.setLoginCredentials(loginCredentials);
-        objectOutputStream.writeObject(client_login);
-
-        NetworkMessage receivedMessage = (NetworkMessage) objectInputStream.readObject();
-
+        receivedMessage = (NetworkMessage) objectInputStream.readObject();
         if (receivedMessage.getStatus().equals(MessageStatus.SUCCESS)) {
             System.out.println("Login successful.");
 
-            // Main command loop
             boolean running = true;
             while (running) {
-                System.out.print("\nEnter a command (SEND, HISTORY, LIST, LOGOUT): ");
-                String command = sc.next().toUpperCase();
+                System.out.println("Commands: SEND, MESSAGES, LOGOUT");
+                System.out.print("Enter command: ");
+                String command = sc.next();
 
-                switch (command) {
-                    case "SEND":
-                        // ... (unchanged code)
-                        break;
+                NetworkMessage commandMessage = new NetworkMessage();
+                switch (command.toUpperCase()) {
+                case "SEND":
+                    System.out.print("Enter the recipient's username: ");
+                    String recipient = sc.next();
+                    System.out.print("Enter your message: ");
+                    sc.nextLine(); // Consume the newline character
+                    String messageText = sc.nextLine();
 
-                    case "HISTORY":
-                        // ... (unchanged code)
-                        break;
+                    ChatMessage chatMessage = new ChatMessage(null, username, new String[]{recipient}, messageText, null);
+                    commandMessage.setType(MessageType.TEXT);
+                    commandMessage.setChatMessage(chatMessage);
+                    objectOutputStream.writeObject(commandMessage);
+                    break;
+                case "MESSAGES":
+                    commandMessage.setType(MessageType.MESSAGES);
+                    objectOutputStream.writeObject(commandMessage);
+                    break;
+                case "LOGOUT":
+                    commandMessage.setType(MessageType.LOGOUT);
+                    objectOutputStream.writeObject(commandMessage);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid command. Please try again.");
+            }
 
-                    case "LIST":
-                        // ... (unchanged code)
-                        break;
-
-                    case "LOGOUT":
-                        // ... (unchanged code)
-                        break;
-
-                    default:
-                        System.out.println("Invalid command. Please try again.");
-                        break;
+                if (running) {
+                    receivedMessage = (NetworkMessage) objectInputStream.readObject();
+                    System.out.println("Server response: " + receivedMessage.getText());
                 }
             }
         } else {
-            System.out.println("Login failed. Please try again.");
+            System.out.println("Login failed.");
         }
 
-        System.out.println("Closing socket");
+        System.out.println("Closing socket.");
+        inputStream.close();
+        outputStream.close();
         socket.close();
     }
 }

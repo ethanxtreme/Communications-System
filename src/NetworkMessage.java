@@ -48,6 +48,10 @@ public class NetworkMessage implements Serializable {
     public void setText(String text){
     	this.messageText = text;
     }
+    
+    public void setChatMessage(ChatMessage chatMessage) {
+    	this.chatMessage = chatMessage;
+    }
 
     public MessageType getType(){
     	return this.type;
