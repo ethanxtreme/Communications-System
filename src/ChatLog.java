@@ -18,14 +18,19 @@ public class ChatLog {
 	
 	
 	// Add new thread to chat log
-	private void addToLog(Thread thread) {
+	public void addToLog(Thread thread) {
 		chatLog.add(thread);
 		numThreads++;
 	}
 	
 	
-	private List<Thread> getLog() {
+	public List<Thread> getLog() {
 		return chatLog;
+	}
+
+	public int getNumThreads() {
+		// TODO Auto-generated method stub
+		return this.numThreads;
 	}
 
 }
