@@ -98,7 +98,7 @@ public class Server {
 	                	    // If the thread already exists, add the message to the existing thread
 	                	    existingThread.addMessage(message.getChatMessage());
 	                	    // Update the chat log with the modified thread
-	                	    modifyLog(existingThread); //this method does not exist yet
+	                	    //modifyLog(existingThread); //this method does not exist yet
 	                	}
 
 	                	//then send the text in the chatmessage to appropriate users
@@ -149,8 +149,8 @@ public class Server {
     }
 
 	public static void login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
-		String data = message.getChatMessage().getMessageText();
-    	String[] fields = data.split(",");
+		String credentials = message.getLoginCredentials();
+    	String[] fields = credentials.split("::"); //stored as: username::password
         String username = fields[0];
         String password = fields[1];
         
