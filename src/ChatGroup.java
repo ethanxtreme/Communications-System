@@ -2,13 +2,7 @@ import java.util.*;
 
 public class ChatGroup {
 	public String groupName;
-	public List<Thread> members;
-	private ChatLog log_obj;
-	
-	public ChatGroup() {
-		members = new ArrayList<Thread>();
-		setgroupname(groupName);
-	}
+	public ArrayList<User> user_list = new ArrayList<User>();
 	
 	public void setgroupname(String groupName) {
 		this.groupName = groupName;
@@ -17,23 +11,19 @@ public class ChatGroup {
 		return groupName;
 	}
 	
-	public void addUser(Thread userId) {
-		members.add(userId);
+	public void addUser(User userId) {
+		user_list.add(userId);
 	}
 	
-	public void removeUser(Thread userId) {
-		for(int i = 0; i < members.size(); i++) {
-			if(members.get(i).equals(userId)) {
-				members.remove(i);
+	public void removeUser(User userId) {
+		for(int i = 0; i < user_list.size(); i++) {
+			if(user_list.get(i).equals(userId)) {
+				user_list.remove(i);
 			}
 		}
 	}
 	
 	public Thread sendGroupMessage(Thread message) {
-		log_obj = new ChatLog();
-		log_obj.chatLog.add(message);
 		return message;
-		
 	}
-
 }
