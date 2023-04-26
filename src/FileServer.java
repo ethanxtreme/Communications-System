@@ -6,8 +6,8 @@ import java.text.ParseException;
 
 public class FileServer {
     
-    private static final String USERS_FILE = "Users.txt";
-    private static final String THREADS_FILE = "Threads.txt";
+    private static final String USERS_FILE = "src/Users.txt";
+    private static final String THREADS_FILE = "src/Threads.txt";
 
     // Load users from Users.txt file
     public ArrayList<User> loadUsers() {
@@ -18,11 +18,17 @@ public class FileServer {
             while ((line = br.readLine()) != null) {
                 // Split user data by comma
                 String[] userData = line.split(",");
+                
+                // added this line so that lines that are invalid in length are skipped
+                if (userData.length != 4) {
+                	continue;
+                }
+                
                 // Create a new User object from the data
                 User user = new User(
                         userData[0],
                         userData[1],
-                        UserType.valueOf(userData[2]),
+                        UserType.valueOf(userData[2].toUpperCase().strip()),
                         userData[3]
                 );
                 // Check if the user is an admin
@@ -42,7 +48,7 @@ public class FileServer {
     // Load chat log from Threads.txt file
     public ArrayList<Thread> loadChatLog(ArrayList<User> users) {
         ArrayList<Thread> chatLog = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("Threads.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(THREADS_FILE))) {
             String line;
             Thread currentThread = null;
             while ((line = br.readLine()) != null) {
