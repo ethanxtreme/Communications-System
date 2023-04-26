@@ -39,7 +39,7 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
-        NetworkMessage receivedMessage;
+        NetworkMessage receivedMessage = new NetworkMessage(); // TODO edit this later, initialized for debugging
 
         // User login
         System.out.print("Enter your username: ");
@@ -51,9 +51,15 @@ public class Client {
         loginMessage.setType(MessageType.LOGIN);
         loginMessage.setLoginCredentials(username + "|" + password);
         objectOutputStream.writeObject(loginMessage);
-
-        // Wait for a response from the server indicating success or failure
-        receivedMessage = (NetworkMessage) objectInputStream.readObject();
+        
+        try {
+	        // Wait for a response from the server indicating success or failure
+	        receivedMessage = (NetworkMessage) objectInputStream.readObject();  // this is where an EOFExeption is thrown
+        
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
         if (receivedMessage.getStatus().equals(MessageStatus.SUCCESS)) {
             System.out.println("Login successful.");
 
