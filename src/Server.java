@@ -32,7 +32,8 @@ public class Server {
             //load in user data and chatlog data data from files
             FileServer fileServer = new FileServer();
             ArrayList<User> users = fileServer.loadUsers();
-            ArrayList<Thread> chatLog = fileServer.loadChatLog(users);
+            ChatLog chatLog = new ChatLog(fileServer.loadChatLog(users));
+            
             while (true) {
                 pool.execute(new CommunicationsServer(listener.accept(), users, chatLog));
             }
@@ -43,12 +44,11 @@ public class Server {
         private Socket socket;
         private ChatLog chatLog = new ChatLog();
         private ArrayList<User> users;
-        private ArrayList<Thread> threads;
 
-        CommunicationsServer(Socket socket, ArrayList<User> users, ArrayList<Thread> chatLog) {
+        CommunicationsServer(Socket socket, ArrayList<User> users, ChatLog chatLog) {
             this.socket = socket;
             this.users = users;
-            this.threads = chatLog;
+            this.chatLog = chatLog;
         }
         @Override
         public void run() {
@@ -68,10 +68,23 @@ public class Server {
                 	
 	                if(message.getType() == MessageType.LOGIN) {
 	                	//Validate login, send login success message to client to authenticate login
-	                		                	
-	                	NetworkMessage successMessage = new NetworkMessage();
-	                	successMessage.setStatus(MessageStatus.SUCCESS);
-	                	objectOutputStream.writeObject(successMessage);
+	                	
+	                	String data = message.getChatMessage().getMessageText();
+	                	String[] fields = data.split(",");
+	                    String username = fields[0];
+	                    String password = fields[1];
+	                    
+	                	Boolean authenticate = login(users, username, password);
+	                	
+	                	if(authenticate.equals(true)) {
+	                		NetworkMessage successMessage = new NetworkMessage();
+		                	successMessage.setStatus(MessageStatus.SUCCESS);
+		                	objectOutputStream.writeObject(successMessage);
+	                	} else {
+	                		NetworkMessage failMessage = new NetworkMessage();
+		                	failMessage.setStatus(MessageStatus.FAIL);
+		                	objectOutputStream.writeObject(failMessage);
+	                	}
 	                	
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
@@ -116,9 +129,15 @@ public class Server {
         }
     }
     
-    public void login(String username, String password) throws IOException {
-        // add validation logic for username and password
-        
+    public static Boolean login(ArrayList<User> users, String username, String password) throws IOException {
+    	
+    	for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    	
     }
     
 }
