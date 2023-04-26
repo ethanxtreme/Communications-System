@@ -85,7 +85,13 @@ public class Server {
 	        
 	                	if (loggedInUser != null) {
                             // Add the connected client to the list of connected clients
-                            addConnectedClient(loggedInUser); // Will work on this - EJ
+	                		
+	                		// START: Maybe try this: (jesse)
+	                		ConnectedClient connectedUser = new ConnectedClient(loggedInUser, objectOutputStream);
+	                		addConnectedClient(connectedUser);
+	                		// END OF SUGGESTION
+	                		
+//                            addConnectedClient(loggedInUser); // Will work on this - EJ
                             
 							connectedClients.add(new ConnectedClient(loggedInUser, objectOutputStream));
 							
@@ -130,7 +136,13 @@ public class Server {
 	                else if(message.getType() == MessageType.LOGOUT) {
 	                	// Close the connection with the client if they logout of the system
                         if (loggedInUser != null) {
-                            removeConnectedClient(loggedInUser);
+                        	
+                        	// START 
+                        	ConnectedClient connectedUser = new ConnectedClient(loggedInUser, objectOutputStream);
+                        	removeConnectedClient(connectedUser);
+                        	// END OF SUGGESTION - Jesse
+                        	
+//                            removeConnectedClient(loggedInUser);
                         }
 
                         NetworkMessage failMessage = new NetworkMessage();
