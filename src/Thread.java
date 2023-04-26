@@ -41,5 +41,10 @@ public class Thread {
 	public ArrayList<ChatMessage> getThread() {
 	    return chatMessages;
 	}
+
+	public String[] getRecipientIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
