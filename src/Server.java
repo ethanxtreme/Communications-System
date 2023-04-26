@@ -11,8 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
 /**
  * A server program that accepts message objects from clients, once a client sends 
  * a login message, the server then waits for text or logout messages, on receiving a
@@ -20,8 +18,11 @@ import java.util.Arrays;
  * send the direct or group messages out to the correct clients
  * on receiving a LOGOUT message, the server will close the socket associated with that thread
  */
-public class Server {
 
+public class Server {
+	// List of connected clients
+    private static ArrayList<User> connectedClients = new ArrayList<>();
+	
     /**
      * Runs the sever, spawns new thread with client connection returns to listening
      * limits number of threads via thread pool, set to 100 for now
@@ -45,12 +46,24 @@ public class Server {
         private Socket socket;
         private ChatLog chatLog = new ChatLog();
         private ArrayList<User> users;
+        private User loggedInUser = null; // To store the currently logged-in user
 
         CommunicationsServer(Socket socket, ArrayList<User> users, ChatLog chatLog) {
             this.socket = socket;
             this.users = users;
             this.chatLog = chatLog;
         }
+        
+        // Adds a connected client to the list of connected clients
+        public synchronized static void addConnectedClient(User user) {
+            connectedClients.add(user);
+        }
+
+        // Removes a connected client from the list of connected clients
+        public synchronized static void removeConnectedClient(User user) {
+            connectedClients.remove(user);
+        }
+        
         @Override
         public void run() {
             System.out.println("Connected: " + socket);
@@ -71,6 +84,10 @@ public class Server {
 	                	//Validate login, send login success message to client to authenticate login
 	                	login(message, objectOutputStream, users);
 	        
+	                	if (loggedInUser != null) {
+                            // Add the connected client to the list of connected clients
+                            addConnectedClient(loggedInUser);
+                        }
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
 	                	
@@ -109,15 +126,19 @@ public class Server {
 	                	
 	                }
 	                else if(message.getType() == MessageType.LOGOUT) {
-	                	//close the thread connected with the client if they logout of the system
-	                	NetworkMessage failMessage = new NetworkMessage();
-	                	failMessage.setStatus(MessageStatus.FAIL);
-	                	objectOutputStream.writeObject(failMessage);
-						socket.close();
-						inputStream.close();
-						outputStream.close();
-	                    System.out.println("Closed: " + socket);
-	
+	                	// Close the connection with the client if they logout of the system
+                        if (loggedInUser != null) {
+                            removeConnectedClient(loggedInUser);
+                        }
+
+                        NetworkMessage failMessage = new NetworkMessage();
+                        failMessage.setStatus(MessageStatus.FAIL);
+                        objectOutputStream.writeObject(failMessage);
+
+                        socket.close();
+                        inputStream.close();
+                        outputStream.close();
+                        System.out.println("Closed: " + socket);
 	                }
 	                else { //type == UNDEFINED
 	                    System.out.println("Error:" + socket);
@@ -148,24 +169,37 @@ public class Server {
     	
     }
 
+<<<<<<< Updated upstream
 	public static void login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
 		String credentials = message.getLoginCredentials();
     	String[] fields = credentials.split("::"); //stored as: username::password
+=======
+    public static User login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
+        String data = message.getChatMessage().getMessageText();
+        String[] fields = data.split(",");
+>>>>>>> Stashed changes
         String username = fields[0];
         String password = fields[1];
-        
-    	Boolean authenticate = authenticate(users, username, password);
-    	
-    	if(authenticate.equals(true)) {
-    		NetworkMessage successMessage = new NetworkMessage();
-        	successMessage.setStatus(MessageStatus.SUCCESS);
-        	objectOutputStream.writeObject(successMessage);
-    	} else {
-    		NetworkMessage failMessage = new NetworkMessage();
-        	failMessage.setStatus(MessageStatus.FAIL);
-        	objectOutputStream.writeObject(failMessage);
-    	}
-		
-	}
-    
+
+        Boolean authenticate = authenticate(users, username, password);
+
+        if (authenticate.equals(true)) {
+            NetworkMessage successMessage = new NetworkMessage();
+            successMessage.setStatus(MessageStatus.SUCCESS);
+            objectOutputStream.writeObject(successMessage);
+
+            // Find the user object for the authenticated user
+            for (User user : users) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    return user;
+                }
+            }
+        } else {
+            NetworkMessage failMessage = new NetworkMessage();
+            failMessage.setStatus(MessageStatus.FAIL);
+            objectOutputStream.writeObject(failMessage);
+        }
+
+        return null;
+    }
 }
