@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 public class Server {
 	// List of connected clients
-    private static ArrayList<User> connectedClients = new ArrayList<>();
+	private static ArrayList<ConnectedClient> connectedClients = new ArrayList<>();
 	
     /**
      * Runs the sever, spawns new thread with client connection returns to listening
@@ -55,13 +55,13 @@ public class Server {
         }
         
         // Adds a connected client to the list of connected clients
-        public synchronized static void addConnectedClient(User user) {
-            connectedClients.add(user);
+        public synchronized static void addConnectedClient(ConnectedClient connectedClient) {
+            connectedClients.add(connectedClient);
         }
 
         // Removes a connected client from the list of connected clients
-        public synchronized static void removeConnectedClient(User user) {
-            connectedClients.remove(user);
+        public synchronized static void removeConnectedClient(ConnectedClient connectedClient) {
+            connectedClients.remove(connectedClient);
         }
         
         @Override
@@ -81,12 +81,14 @@ public class Server {
                 while(!message.getType().equals(MessageType.LOGOUT)) {//wait for logout message before closing connection
                 	
 	                if(message.getType() == MessageType.LOGIN) {
-	                	//Validate login, send login success message to client to authenticate login
-	                	login(message, objectOutputStream, users);
+	                	loggedInUser = login(message, objectOutputStream, users); // Set loggedInUser here	                	
 	        
 	                	if (loggedInUser != null) {
                             // Add the connected client to the list of connected clients
-                            addConnectedClient(loggedInUser);
+                            addConnectedClient(loggedInUser); // Will work on this - EJ
+                            
+							connectedClients.add(new ConnectedClient(loggedInUser, objectOutputStream));
+							
                         }
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
@@ -158,6 +160,24 @@ public class Server {
         }
     }
     
+    public static class ConnectedClient {
+        private User user;
+        private ObjectOutputStream outputStream;
+
+        public ConnectedClient(User user, ObjectOutputStream outputStream) {
+            this.user = user;
+            this.outputStream = outputStream;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public ObjectOutputStream getOutputStream() {
+            return outputStream;
+        }
+    }
+    
     public static Boolean authenticate(ArrayList<User> users, String username, String password) throws IOException {
     	
     	for (User user : users) {
@@ -182,18 +202,21 @@ public class Server {
             successMessage.setStatus(MessageStatus.SUCCESS);
             objectOutputStream.writeObject(successMessage);
 
-            // Find the user object for the authenticated user
-            for (User user : users) {
-                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                    return user;
-                }
-            }
+            return getUserByUsername(username, users); // Return the authenticated user
         } else {
             NetworkMessage failMessage = new NetworkMessage();
             failMessage.setStatus(MessageStatus.FAIL);
             objectOutputStream.writeObject(failMessage);
+            return null; // Return null if authentication fails
         }
-
+    }
+    
+    public static User getUserByUsername(String username, ArrayList<User> users) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
         return null;
     }
 }
