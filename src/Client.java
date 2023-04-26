@@ -21,6 +21,8 @@ public class Client {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the port number to connect to: <1234>");
         int port = sc.nextInt();
+        
+        // Get the local host's IP address
         InetAddress localhost = InetAddress.getLocalHost();
         System.out.println("IPV4 Address : " + (localhost.getHostAddress()).trim());
         String host = localhost.getHostAddress().trim();
@@ -50,10 +52,12 @@ public class Client {
         loginMessage.setLoginCredentials(username + "|" + password);
         objectOutputStream.writeObject(loginMessage);
 
+        // Wait for a response from the server indicating success or failure
         receivedMessage = (NetworkMessage) objectInputStream.readObject();
         if (receivedMessage.getStatus().equals(MessageStatus.SUCCESS)) {
             System.out.println("Login successful.");
 
+            // Main loop for handling user commands
             boolean running = true;
             while (running) {
                 System.out.println("Commands: SEND, MESSAGES, LOGOUT");
@@ -86,7 +90,8 @@ public class Client {
                 default:
                     System.out.println("Invalid command. Please try again.");
             }
-
+                
+                // Wait for a response from the server and display it to the user
                 if (running) {
                     receivedMessage = (NetworkMessage) objectInputStream.readObject();
                     System.out.println("Server response: " + receivedMessage.getText());
@@ -96,6 +101,7 @@ public class Client {
             System.out.println("Login failed.");
         }
 
+        // Close the input and output streams and the socket
         System.out.println("Closing socket.");
         inputStream.close();
         outputStream.close();
