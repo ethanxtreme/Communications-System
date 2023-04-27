@@ -106,6 +106,21 @@ public class Server {
 	                		userRecipients.add(getUserById(recipients[i], users));
 	                	}
 	                	//userRecipients holds array list of users to send message to
+	                	
+	                	//logic to send messages to connected recipients
+	                	for(ConnectedClient client : connectedClients) {
+	                		for(User recipient : userRecipients) {
+		                		if(client.getUser().equals(recipient)) {
+		                			ObjectOutputStream sendTo = client.getOutputStream();
+		                			//then send the text in the chatmessage to appropriate users
+		    	                	NetworkMessage messageToSend = new NetworkMessage();
+		    	                	messageToSend.setType(MessageType.TEXT);
+		    	                	messageToSend.setStatus(MessageStatus.SUCCESS);
+		    	                	messageToSend.setText(message.getChatMessage().getMessageText());
+		    	                	sendTo.writeObject(messageToSend);
+		                		}
+		                	}
+	                	}
 	            
 	                	// Check if the thread already exists
 	                	Thread existingThread = null;
@@ -132,11 +147,7 @@ public class Server {
 	                	}
 
 	                	
-	                	//then send the text in the chatmessage to appropriate users
-	                	NetworkMessage toSend = new NetworkMessage();
-	                	toSend.setType(MessageType.TEXT);
-	                	toSend.setStatus(MessageStatus.SUCCESS);
-	                	objectOutputStream.writeObject(toSend);
+	                
 	                	
 	                }
 	                else if(message.getType() == MessageType.LOGOUT) {
