@@ -111,5 +111,6 @@ public class Client {
         inputStream.close();
         outputStream.close();
         socket.close();
+        sc.close();
     }
 }
