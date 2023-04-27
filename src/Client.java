@@ -82,6 +82,8 @@ public class Client {
                     commandMessage.setType(MessageType.TEXT);
                     commandMessage.setChatMessage(chatMessage);
                     objectOutputStream.writeObject(commandMessage);
+                    //following for debugging
+                    System.out.println("Sending Message"+messageText);
                     break;
                 case "MESSAGES":
                     commandMessage.setType(MessageType.MESSAGES);
@@ -98,6 +100,7 @@ public class Client {
                 
                 // Wait for a response from the server and display it to the user
                 if (running) {
+                	System.out.println("Waiting for message from server...");
                     receivedMessage = (NetworkMessage) objectInputStream.readObject();
                     System.out.println("Server response: " + receivedMessage.getText());
                 }

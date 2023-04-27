@@ -96,6 +96,7 @@ public class Server {
 	                }
 	                else if(message.getType() == MessageType.TEXT) {
 	                	
+	                	System.out.println("Recieved TEXT message from client:" + message.getChatMessage().getMessageText());
 	                	// Get the recipient list from the message
 	                	String[] recipients = message.getChatMessage().getRecipientIds();
 	                	ArrayList<User> userRecipients = new ArrayList<>();
@@ -118,6 +119,11 @@ public class Server {
 		                		}
 		                	}
 	                	}
+	                	System.out.println("Sending success back");
+	                    NetworkMessage successMessage = new NetworkMessage();
+	                    successMessage.setText("Message sent successfully");
+	                    successMessage.setStatus(MessageStatus.SUCCESS);
+	                    objectOutputStream.writeObject(successMessage);
 	            
 	                	// Check if the thread already exists
 	                	Thread existingThread = null;
@@ -143,9 +149,7 @@ public class Server {
 	                	    //modifyLog(existingThread); //this method does not exist yet
 	                	}
 
-	                	
-	                
-	                	
+	      	
 	                }
 	                else if(message.getType() == MessageType.LOGOUT) {
 	                	// Close the connection with the client if they logout of the system
