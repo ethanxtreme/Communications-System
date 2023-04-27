@@ -1,6 +1,8 @@
 import java.util.Date;
+import java.io.Serializable;
 
-public class ChatMessage {
+
+public class ChatMessage implements Serializable {
 	// Class fields
     private String messageId;
     private String senderId;
