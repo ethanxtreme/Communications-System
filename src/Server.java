@@ -101,7 +101,12 @@ public class Server {
 	                	
 	                	// Get the recipient list from the message
 	                	String[] recipients = message.getChatMessage().getRecipientIds();
-
+	                	ArrayList<User> userRecipients = null;
+	                	for(int i = 0; i < recipients.length; i ++) {
+	                		userRecipients.add(getUserById(recipients[i], users));
+	                	}
+	                	//userRecipients holds array list of users to send message to
+	            
 	                	// Check if the thread already exists
 	                	Thread existingThread = null;
 	                	for (int i = 0; i < chatLog.getLog().size(); i++) {
@@ -126,6 +131,7 @@ public class Server {
 	                	    //modifyLog(existingThread); //this method does not exist yet
 	                	}
 
+	                	
 	                	//then send the text in the chatmessage to appropriate users
 	                	NetworkMessage toSend = new NetworkMessage();
 	                	toSend.setType(MessageType.TEXT);
@@ -226,6 +232,15 @@ public class Server {
     public static User getUserByUsername(String username, ArrayList<User> users) {
         for (User user : users) {
             if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    public static User getUserById(String userId, ArrayList<User> users) {
+    	for (User user : users) {
+            if (user.getId().equals(userId)) {
                 return user;
             }
         }
