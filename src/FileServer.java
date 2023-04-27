@@ -1,6 +1,7 @@
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.text.ParseException;
 
@@ -16,8 +17,10 @@ public class FileServer {
         try (BufferedReader br = new BufferedReader(new FileReader(USERS_FILE))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Split user data by comma
-                String[] userData = line.split(",");
+            	// Split user data by comma and trim spaces
+                String[] userData = Arrays.stream(line.split(","))
+                                          .map(String::trim)
+                                          .toArray(String[]::new);
                 
                 // added this line so that lines that are invalid in length are skipped
                 if (userData.length != 4) {
@@ -31,10 +34,6 @@ public class FileServer {
                         UserType.valueOf(userData[2].toUpperCase().strip()),
                         userData[3]
                 );
-                // Check if the user is an admin
-                if (userData.length > 4 && userData[4].equals("true")) {
-                    user.setAdmin();
-                }
                 // Add the user to the users list
                 users.add(user);
             }
@@ -109,8 +108,7 @@ public class FileServer {
                         user.getId() + "," +
                         user.getUsername() + "," +
                         user.getType() + "," +
-                        user.getPassword() + "," +
-                        user.isAdmin()
+                        user.getPassword() + ","
                 );
             }
         } catch (IOException e) {

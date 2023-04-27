@@ -1,3 +1,4 @@
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -20,7 +21,7 @@ public class Client {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the port number to connect to: <1234>");
-        int port = sc.nextInt();
+        int port = Integer.parseInt(sc.nextLine());
         
         // Get the local host's IP address
         InetAddress localhost = InetAddress.getLocalHost();
@@ -39,25 +40,23 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
-        NetworkMessage receivedMessage = new NetworkMessage(); // TODO edit this later, initialized for debugging
-
         // User login
         System.out.print("Enter your username: ");
-        String username = sc.next();
+        String username = sc.nextLine();
         System.out.print("Enter your password: ");
-        String password = sc.next();
+        String password = sc.nextLine();
 
         NetworkMessage loginMessage = new NetworkMessage();
         loginMessage.setType(MessageType.LOGIN);
-        loginMessage.setLoginCredentials(username + "|" + password);
+        loginMessage.setLoginCredentials(username + "::" + password);
         objectOutputStream.writeObject(loginMessage);
         
-        try {
-	        // Wait for a response from the server indicating success or failure
-	        receivedMessage = (NetworkMessage) objectInputStream.readObject();  // this is where an EOFExeption is thrown
+        NetworkMessage receivedMessage = null;
         
-        } catch (Exception e) {
-        	e.printStackTrace();
+        try {
+            receivedMessage = (NetworkMessage) objectInputStream.readObject();
+        } catch (EOFException e) {
+            System.out.println("Error: Unexpected end of stream");
         }
         
         if (receivedMessage.getStatus().equals(MessageStatus.SUCCESS)) {

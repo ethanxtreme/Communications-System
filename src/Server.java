@@ -69,11 +69,13 @@ public class Server {
             System.out.println("Connected: " + socket);
             try {
 
+            	// Output stream socket
+            	OutputStream outputStream = socket.getOutputStream();
+            	ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+
+            	// Input stream socket
             	InputStream inputStream = socket.getInputStream();
-                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-                
-                OutputStream outputStream = socket.getOutputStream();
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            	ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
                 
                 // read the  messages from the socket
                 NetworkMessage message = (NetworkMessage) objectInputStream.readObject();
@@ -84,14 +86,9 @@ public class Server {
 	                	loggedInUser = login(message, objectOutputStream, users); // Set loggedInUser here	                	
 	        
 	                	if (loggedInUser != null) {
-                            // Add the connected client to the list of connected clients
-	                		
-	                		// START: Maybe try this: (jesse)
+	                		// Add the connected client to the list of connected clients (Jesse's suggestion)
 	                		ConnectedClient connectedUser = new ConnectedClient(loggedInUser, objectOutputStream);
 	                		addConnectedClient(connectedUser);
-	                		// END OF SUGGESTION
-	                		
-//                            addConnectedClient(loggedInUser); // Will work on this - EJ
                             
 							connectedClients.add(new ConnectedClient(loggedInUser, objectOutputStream));
 							
@@ -101,7 +98,7 @@ public class Server {
 	                	
 	                	// Get the recipient list from the message
 	                	String[] recipients = message.getChatMessage().getRecipientIds();
-	                	ArrayList<User> userRecipients = null;
+	                	ArrayList<User> userRecipients = new ArrayList<>();
 	                	for(int i = 0; i < recipients.length; i ++) {
 	                		userRecipients.add(getUserById(recipients[i], users));
 	                	}
@@ -154,10 +151,9 @@ public class Server {
 	                	// Close the connection with the client if they logout of the system
                         if (loggedInUser != null) {
                         	
-                        	// START 
+                        	// Remove the connected client from the list of connected clients (Jesse's suggestion)
                         	ConnectedClient connectedUser = new ConnectedClient(loggedInUser, objectOutputStream);
                         	removeConnectedClient(connectedUser);
-                        	// END OF SUGGESTION - Jesse
                         	
 //                            removeConnectedClient(loggedInUser);
                         }
@@ -208,15 +204,17 @@ public class Server {
     }
     
     public static Boolean authenticate(ArrayList<User> users, String username, String password) throws IOException {
-    	
-    	for (User user : users) {
+        System.out.println("Attempting to authenticate user: " + username + " with password: " + password);
+        for (User user : users) {
+            System.out.println("Comparing with user: " + user.getUsername() + " with password: " + user.getPassword());
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                System.out.println("Authentication successful");
                 return true;
             }
         }
+        System.out.println("Authentication failed");
         return false;
-    	
-    }		
+    }	
 
     public static User login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
     	String credentials = message.getLoginCredentials();
@@ -228,12 +226,14 @@ public class Server {
 
         if (authenticate.equals(true)) {
             NetworkMessage successMessage = new NetworkMessage();
+            successMessage.setType(MessageType.LOGIN);
             successMessage.setStatus(MessageStatus.SUCCESS);
             objectOutputStream.writeObject(successMessage);
 
             return getUserByUsername(username, users); // Return the authenticated user
         } else {
             NetworkMessage failMessage = new NetworkMessage();
+            failMessage.setType(MessageType.LOGIN);
             failMessage.setStatus(MessageStatus.FAIL);
             objectOutputStream.writeObject(failMessage);
             return null; // Return null if authentication fails
