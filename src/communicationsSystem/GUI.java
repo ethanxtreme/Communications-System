@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class GUI {
 	public static void main(String[] args) {
-//	    createLoginWindow();
+//	    createLoginWindow();  		// commented out for demonstration purposes
 		createMessageWindow(true);   // boolean parameter is true for admin, false for other users
 	   }
 	
@@ -30,7 +30,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		createMessageUI(frame, isAdmin);	
-		frame.setSize(900, 720);   
+		frame.setSize(800, 680);   
 	    frame.setLocationRelativeTo(null);  // Center on screen
 	    frame.setVisible(true);	// make visible
 	}
@@ -158,11 +158,11 @@ public class GUI {
 	    panel.add(messagesScrollPane, constraints);
 	    
 	    constraints.gridx = 0;
-	    constraints.gridy = 5;
+	    constraints.gridy = 2;
 	    panel.add(createGroupButton, constraints);
 	    
 	    constraints.gridx = 0;
-	    constraints.gridy = 6;
+	    constraints.gridy = 3;
 	    panel.add(viewLogsButton, constraints);
 	    
 	    constraints.gridx = 1;
