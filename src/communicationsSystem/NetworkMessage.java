@@ -1,3 +1,4 @@
+package communicationsSystem;
 import java.io.Serializable;
 
 public class NetworkMessage implements Serializable {
