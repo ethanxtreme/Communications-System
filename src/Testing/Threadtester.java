@@ -10,18 +10,18 @@ import java.util.*;
 //import org.junit.jupiter.api.Test;
 import org.junit.Test;
 
-class Threadtester {
+public class Threadtester {
 	
 	Thread test_thread = new Thread();
 
 	@Test
-	void testThread() { //default constructor
+	public void testThread() { //default constructor
 		System.out.println("testThread number of threads" + test_thread.getNumMessages());
 		assertEquals(0,test_thread.getNumMessages());
 	}
 
 	@Test
-	void testThreadConstructor() { //constructor
+	public void testThreadConstructor() { //constructor
 		//tests if ChatMessage[] is appended to arraylist
 		boolean trueBool = true;
 		boolean falseBool = false;
@@ -39,7 +39,7 @@ class Threadtester {
 	}
 
 	@Test
-	void testAddMessage() {
+	public void testAddMessage() {
 		boolean trueBool = true;
 		boolean falseBool = false;
 		ArrayList<ChatMessage> hold_testmessage = new ArrayList<>();
@@ -57,13 +57,13 @@ class Threadtester {
 	}
 
 	@Test
-	void testGetNumMessages() {
+	public void testGetNumMessages() {
 		assertEquals(0, test_thread.getNumMessages());
 		
 	}
 
 	@Test
-	void testGetThread() {
+	public void testGetThread() {
 		ArrayList<ChatMessage> hold_testmessage = new ArrayList<>();
 		String[] test_recipentIDs = {"a", "b", "c"};
 		Date test_date = new Date();
@@ -74,7 +74,7 @@ class Threadtester {
 	}
 
 	@Test
-	void testGetRecipientIds() {
+	public void testGetRecipientIds() {
 		String[] recipientids = {};
 		String content="";
 		for(int i = 0; i < recipientids.length; i++) {
