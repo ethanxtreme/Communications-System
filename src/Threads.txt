@@ -1,6 +1,0 @@
-// ThreadID # | # Messages
-// messageID,user,reciepients,message,timestamp
-
-1|2 
-1,User1,[User2,User3],Hello!,2023-04-30'T'22:09:31.321
-2,User2,[User1,User3],Hi there!,2023-04-30'T'22:09:52.155
