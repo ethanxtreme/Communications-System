@@ -19,6 +19,7 @@ import java.util.Scanner;
  */
 
 public class Client {
+	
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the port number to connect to: <1234>");
@@ -117,5 +118,10 @@ public class Client {
         outputStream.close();
         socket.close();
         sc.close();
+    }
+    
+    public static void login(String username, String password) {
+    	
+    	System.out.println("FROM GUI, LOGIN CALLED WITH USERNAME AND PASSWORD " + username + " " + password);
     }
 }

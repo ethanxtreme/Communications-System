@@ -7,27 +7,28 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import java.io.*;
 
 public class GUI {
-//	public static void main(String[] args) {
-//	    createLoginWindow();  		// commented out for demonstration purposes
-////		createMessageWindow(true);   // boolean parameter is true for admin, false for other users
-//	   }
 	
 	public GUI(String window, boolean isAdmin) {
+		
 		if (window.equals("login")) {
 			createLoginWindow();
 		}
 		else {
 			createMessageWindow(isAdmin);
 		}
+		
 	}
 	
 	private static void createLoginWindow() {    
+
 		JFrame frame = new JFrame("Log in");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      
+	    
 	    createLoginUI(frame);
+	    
 	    frame.setSize(360, 200);      
 	    frame.setLocationRelativeTo(null);  // Center on screen
 	    frame.setVisible(true);	// make visible
@@ -45,7 +46,6 @@ public class GUI {
 	}
 	
 	private static void createLoginUI(final JFrame frame){
-		
 		
 	    JPanel panel = new JPanel(new GridBagLayout());
 	    
@@ -67,17 +67,18 @@ public class GUI {
 	    
 	    loginButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		String pass;
 	    		String name = usernameText.getText();
 				char[] passArray = passwordText.getPassword();
 				
 				// convert char[] to String
-				pass = new String(passArray);
+				String pass = new String(passArray);
 				
 				// TODO debug message
 //				JOptionPane.showMessageDialog(frame, "Logging in with username -> password = " + name + " -> " + pass);
 				// TODO here, once a login function with username and password as parameters is
 				// created, just pass name and pass into the function
+				
+				
 	    	}
 	    });
 	    
@@ -115,7 +116,9 @@ public class GUI {
 //	    frame.getRootPane().setDefaultButton(); //Default button focus
 	    // finally adds all items to frame
 	    frame.getContentPane().add(panel, BorderLayout.CENTER); 
+	    
 	}
+	
 	
 	private static void createMessageUI(final JFrame frame, boolean isAdmin) {
 		JPanel panel = new JPanel(new GridBagLayout());
