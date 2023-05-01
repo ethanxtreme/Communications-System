@@ -18,7 +18,7 @@ import java.util.Arrays;
  * TEXT message, the server will save the message into a ChatLog, then 
  * send the direct or group messages out to the correct clients
  * on receiving a LOGOUT message, the server will close the socket associated with that thread
- */
+ */ 
 
 public class Server {
 	// List of connected clients
