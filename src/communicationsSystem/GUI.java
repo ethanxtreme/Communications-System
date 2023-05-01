@@ -11,6 +11,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.lang.Thread;
+
 
 // the only solution I think might work is connecting the GUI to the server so that it can have
 // access to functions and info that server contains
@@ -228,32 +230,79 @@ public class GUI {
 	    		// deletes the text inside the message text field
 	    		messageText.setText("");
 	    		
+	    		
+	            // Generate a response
+		        String responseText = "I'm busy right now. Can we talk later?";
+
+		        // Get the name of the user who received the message
+		        String recipientName = "Jane Doe"; // TODO: replace with actual name
+
+		        // Create a new message object
+		        textArea.setText(textArea.getText() + recipientName +": "+responseText);
+		        //Message response = new Message(recipientName, responseText, new Date());
+
+	           
+	            
 	    	}
 	    });
 	    
+	    createGroupButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            JFrame frame = new JFrame("Create Group");
+	            JPanel panel = new JPanel();
+	            JLabel label = new JLabel("Enter usernames of group members separated by commas:");
+	            JTextField textField = new JTextField(20);
+	            JButton button = new JButton("Create");
+
+	            panel.add(label);
+	            panel.add(textField);
+	            panel.add(button);
+	            frame.add(panel);
+
+	            frame.pack();
+	            frame.setVisible(true);
+
+	            button.addActionListener(new ActionListener() {
+	                @Override
+	                public void actionPerformed(ActionEvent e) {
+	                    String input = textField.getText();
+	                    // Parse the usernames from the input string and add them to the group
+	                    // ...
+	                    frame.dispose();
+	                }
+	            });
+	        }
+	    });
 	    
 	    constraints.gridx = 0;
 	    constraints.gridy = 0;
 	    panel.add(convosComboBox, constraints);
 	    
+	    //constraints.gridx = 0;
 	    constraints.gridx = 0;
+	    //constraints.gridy = 1;
 	    constraints.gridy = 1;
+
 	    panel.add(groupsComboBox, constraints);
 	    
-	    constraints.gridx = 1;
-	    constraints.gridy = 0;
-	    panel.add(conversationLabel);
+	    constraints.gridx = 1; //was 1
+	    constraints.gridy = 0; //was 0
+	    constraints.gridwidth = 2; //was not here
+	    panel.add(conversationLabel, constraints);
 	    
-	    constraints.gridx = 1;
-	    constraints.gridy = 1;
+	    constraints.gridx = 1; //was 1
+	    constraints.gridy = 1; //was 1
+	    constraints.gridwidth = 2; //was not here
+
 	    panel.add(messagesScrollPane, constraints);
 	    
 	    constraints.gridx = 0;
-	    constraints.gridy = 2;
+	    constraints.gridy = 5;
 	    panel.add(createGroupButton, constraints);
 	    
 	    constraints.gridx = 0;
-	    constraints.gridy = 3;
+	    constraints.gridy = 6;
 	    panel.add(viewLogsButton, constraints);
 	    
 	    constraints.gridx = 1;
@@ -266,6 +315,7 @@ public class GUI {
 	    
 	    // finally adds all components to frame
 	    frame.getContentPane().add(panel, BorderLayout.CENTER); 
+	    
 	}
 	
 	
