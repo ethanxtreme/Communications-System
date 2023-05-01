@@ -10,8 +10,8 @@ import javax.swing.*;
 
 public class GUI {
 	public static void main(String[] args) {
-//	    createLoginWindow();  		// commented out for demonstration purposes
-		createMessageWindow(true);   // boolean parameter is true for admin, false for other users
+	    createLoginWindow();  		// commented out for demonstration purposes
+//		createMessageWindow(true);   // boolean parameter is true for admin, false for other users
 	   }
 	
 	private static void createLoginWindow() {    
@@ -35,17 +35,25 @@ public class GUI {
 	    frame.setVisible(true);	// make visible
 	}
 	
-	private static void createLoginUI(final JFrame frame){  
+	private static void createLoginUI(final JFrame frame){
 	    JPanel panel = new JPanel(new GridBagLayout());
-	     
+	    
 	    JLabel usernameLabel = new JLabel("Username:");
 	    JTextField usernameText = new JTextField(20); // create a textfield for entering username
-	      
+	    
 	    JLabel passwordLabel = new JLabel("Password:");
 	    JPasswordField passwordText = new JPasswordField(20); // textfield for password
 	    JButton loginButton = new JButton("Log In");
 	    JButton exitButton = new JButton("Exit");
-	      
+	    
+	    // adding action listeners to buttons
+	    exitButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		JOptionPane.showMessageDialog(frame, "Quitting Application.");
+	    		System.exit(0);	// End program
+	        }
+	    });
+	    
 	    GridBagConstraints constraints = new GridBagConstraints();
 	    constraints.anchor = GridBagConstraints.WEST;
 	    constraints.insets = new Insets(10, 10, 10, 10);
