@@ -104,12 +104,15 @@ public class Server {
 	                	for(int i = 0; i < recipients.length; i ++) {
 	                		userRecipients.add(getUserById(recipients[i], users));
 	                	}
+	                	String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
+	                	participants[participants.length - 1] = message.getChatMessage().getSenderId();
+	                	//update the chatlog with new message
+	                	chatLog.addMessage(message, participants);
 	                	
-	                	//Send the message to connected user recipients
+	                	//Send the update request message to connected user recipients
 	                	sendMessage(userRecipients, message);
 	                	
-	                	//update the chatlog with new message
-	                	chatLog.addMessage(message, recipients);
+	                	
 	
 	                }
 	                else if(message.getType() == MessageType.LOGOUT) {
