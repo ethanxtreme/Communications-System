@@ -264,23 +264,19 @@ public class GUI {
 	    createGroupButton.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
+	        	JPanel panel = new JPanel(new GridBagLayout());
+	    		
+	    		GridBagConstraints constraints = new GridBagConstraints();
+	    	    constraints.anchor = GridBagConstraints.WEST;
+	    	    constraints.insets = new Insets(10, 10, 10, 10);
 	            JFrame frame = new JFrame("Create Group");
-	            JPanel panel = new JPanel();
+
 	            JLabel groupLabel = new JLabel("Enter the name of the group:");
 	            JTextField groupTextField = new JTextField(20);
 	            JLabel label = new JLabel("Enter usernames of group members separated by commas:");
 	            JTextField textField = new JTextField(20);
 	            JButton button = new JButton("Create");
 
-	            panel.add(groupLabel);
-	            panel.add(groupTextField);
-	            panel.add(label);
-	            panel.add(textField);
-	            panel.add(button);
-	            frame.add(panel);
-
-	            frame.pack();
-	            frame.setVisible(true);
 
 	            button.addActionListener(new ActionListener() {
 	                @Override
@@ -291,6 +287,34 @@ public class GUI {
 	                    frame.dispose();
 	                }
 	            });
+	           
+	            
+	            constraints.gridx = 0;
+	            constraints.gridy = 0;
+	            panel.add(groupLabel, constraints);
+	            
+	            constraints.gridx = 0;
+	    	    constraints.gridy = 1;
+	            panel.add(groupTextField, constraints);
+	            
+	            constraints.gridx = 1;
+	    	    constraints.gridy = 0;
+	            panel.add(label, constraints);
+	            
+	            constraints.gridx = 1;
+	    	    constraints.gridy = 1;
+	            panel.add(textField, constraints);
+	            
+	            constraints.gridx = 2;
+	    	    constraints.gridy = 1;
+	            panel.add(button, constraints);          
+	            
+	            
+	            frame.getContentPane().add(panel, BorderLayout.CENTER);
+	            
+	            frame.setSize(800, 200);      
+	    	    frame.setLocationRelativeTo(null);  // Center on screen
+	    	    frame.setVisible(true);	// make visible
 	        }
 	    });
 
