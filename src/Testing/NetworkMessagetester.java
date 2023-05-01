@@ -1,70 +1,101 @@
 package Testing;
 import communicationsSystem.NetworkMessage;
+import communicationsSystem.MessageType;
+import communicationsSystem.MessageStatus;
+import communicationsSystem.ChatMessage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import java.util.Date;
 
-class NetworkMessagetester {
+//import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+public class NetworkMessagetester {
+	
+	NetworkMessage test_message = new NetworkMessage();
+	MessageType test_type = null;
+	MessageStatus test_status = null;
+	NetworkMessage initial_testmessage = new NetworkMessage(test_type.LOGIN,test_status.SUCCESS,"Hello");
 
 	@Test
-	void testNetworkMessage() {
-		fail("Not yet implemented");
+	public void testNetworkMessage() { //tests default constructor
+		System.out.println("test message type:" + test_message.getType());
+		System.out.println("test message status:" + test_message.getStatus());
+		System.out.println("test message text:" + test_message.getText());
 	}
 
 	@Test
-	void testNetworkMessageMessageTypeMessageStatusString() {
-		fail("Not yet implemented");
+	public void testNetworkMessageConstructor() { //tests constructor
+		assertEquals(test_type.LOGIN, initial_testmessage.getType());
+		assertEquals(test_status.SUCCESS, initial_testmessage.getStatus());
+		assertEquals("Hello", initial_testmessage.getText());
 	}
 
 	@Test
-	void testSetType() {
-		fail("Not yet implemented");
+	public void testSetType() {
+		test_message.setType(test_type.LOGIN);
+		assertEquals(test_type.LOGIN,test_message.getType());
 	}
 
 	@Test
-	void testSetStatus() {
-		fail("Not yet implemented");
+	public void testSetStatus() {
+		test_message.setStatus(test_status.SUCCESS);
+		assertEquals(test_status.SUCCESS,test_message.getStatus());
 	}
 
 	@Test
-	void testSetLoginCredentials() {
-		fail("Not yet implemented");
+	public void testSetLoginCredentials() {
+		String login = "abcd";
+		test_message.setLoginCredentials(login);
+		assertEquals(login, test_message.getLoginCredentials());
 	}
 
 	@Test
-	void testGetLoginCredentials() {
-		fail("Not yet implemented");
+	public void testGetLoginCredentials() {
+		String login = "efgh";
+		test_message.setLoginCredentials(login);
+		assertEquals(login, test_message.getLoginCredentials());
 	}
 
 	@Test
-	void testSetText() {
-		fail("Not yet implemented");
+	public void testSetText() {
+		String test_text = "Hi";
+		test_message.setText(test_text);
+		assertEquals("Hi", test_message.getText());
+		
 	}
 
 	@Test
-	void testSetChatMessage() {
-		fail("Not yet implemented");
+	public void testSetChatMessage() {
+		String[] test_recipientIDs = {};
+		Date test_time = new Date();
+		ChatMessage testmessage = new ChatMessage("1", "abcd",test_recipientIDs, "Hello", test_time);
+		test_message.setChatMessage(testmessage);
+		assertEquals(testmessage, test_message.getChatMessage());
 	}
 
 	@Test
-	void testGetType() {
-		fail("Not yet implemented");
+	public void testGetType() {
+		assertEquals(test_type.LOGIN, initial_testmessage.getType());
 	}
 
 	@Test
-	void testGetStatus() {
-		fail("Not yet implemented");
+	public void testGetStatus() {
+		assertEquals(test_status.SUCCESS, initial_testmessage.getStatus());
 	}
 
 	@Test
-	void testGetText() {
-		fail("Not yet implemented");
+	public void testGetText() {
+		assertEquals("Hello", initial_testmessage.getText());
 	}
 
 	@Test
-	void testGetChatMessage() {
-		fail("Not yet implemented");
+	public void testGetChatMessage() {
+		String[] test_recipientIDs = {};
+		Date test_time = new Date();
+		ChatMessage testmessage = new ChatMessage("1", "abcd",test_recipientIDs, "Hello", test_time);
+		assertEquals(testmessage, test_message.getChatMessage());
 	}
 
 }
