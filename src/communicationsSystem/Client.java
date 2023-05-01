@@ -51,12 +51,12 @@ public class Client {
         objectInputStream = new ObjectInputStream(inputStream);
 
         // TODO debugging tool:
-        System.out.print("Type 'login' to test loggin in, otherwise, messaging will be tested: ");
-        String testType = sc.nextLine();
+//        System.out.print("Type 'login' to test loggin in, otherwise, messaging will be tested: ");
+//        String testType = sc.nextLine();
         
         // TODO trying to call GUI from client
         // create the GUI and pass the client instance to the constructor
-        GUI gui = new GUI(testType, false, client);
+        GUI gui = new GUI("login", false, client);
         client.setGUI(gui);
         
         // User login
