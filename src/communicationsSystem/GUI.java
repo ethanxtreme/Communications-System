@@ -215,7 +215,8 @@ public class GUI {
 	    });
 	    
 	    sendButton.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
+	    	@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
 	    		Date timestamp = new Date();
 	    		String time = timestamp.toString();
 	    		
@@ -234,7 +235,8 @@ public class GUI {
 	    		// TODO in reality, this should put the message into the thread and then write the entire
 	    		// thread to the screen each time
 	    		if (messageText.getText().strip() != "") {
-	    			textArea.setText(timestamp + "\n" + textArea.getText() + sender.getUsername() + ": " + messageText.getText() + "\n");
+	    			textArea.setText(textArea.getText() + timestamp.getHours() + ":" + timestamp.getMinutes() + " " +
+	    							sender.getUsername() + ": " + messageText.getText() + "\n");
 	    		}
 	    		// deletes the text inside the message text field
 	    		messageText.setText("");
@@ -247,7 +249,8 @@ public class GUI {
 		        String recipientName = (String) convosComboBox.getSelectedItem(); // TODO: replace with actual name
 
 		        // Create a new message object
-		        textArea.setText(textArea.getText() + recipientName +": "+responseText + "\n");
+		        textArea.setText(textArea.getText() + timestamp.getHours() + ":" + timestamp.getMinutes() + 
+		        				" " + recipientName + ": "+responseText + "\n");
 		        //Message response = new Message(recipientName, responseText, new Date());
 
 	           
