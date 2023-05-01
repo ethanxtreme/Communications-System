@@ -81,7 +81,8 @@ public class Server {
                 // read the  messages from the socket
                 NetworkMessage message = (NetworkMessage) objectInputStream.readObject();
                 
-                while(!message.getType().equals(MessageType.LOGOUT)) {//wait for logout message before closing connection
+                boolean running = true;
+                while(running == true) {//wait for logout message before closing connection
                 	
 	                if(message.getType() == MessageType.LOGIN) {
 	                	loggedInUser = login(message, objectOutputStream, users); // Set loggedInUser here	                	
@@ -106,57 +107,22 @@ public class Server {
 	                	
 	                	//Send the message to connected user recipients
 	                	sendMessage(userRecipients, message);
-	            
 	                	
-	                	updateChatLog(message);
-	               
-	                	// Check if the thread already exists
-	                	Thread existingThread = null;
-	                	for (int i = 0; i < chatLog.getLog().size(); i++) {
-	                	    Thread thread = chatLog.getLog().get(i);
-	                	    String[] threadRecipients = thread.getRecipientIds();
-	                	    if (Arrays.equals(threadRecipients, recipients)) { //not sure if this is the right check
-	                	        existingThread = thread;
-	                	        break;
-	                	    }
-	                	}
-
-	                	if (existingThread == null) {
-	                	    // If the thread doesn't exist, create a new thread and add it to the chat log
-	                	    Thread newThread = new Thread();
-	                	    newThread.addMessage(message.getChatMessage());
-	                	    chatLog.addToLog(newThread);
-
-	                	} else {
-	                	    // If the thread already exists, add the message to the existing thread
-	                	    existingThread.addMessage(message.getChatMessage());
-	                	    // Update the chat log with the modified thread
-	                	    //modifyLog(existingThread); //this method does not exist yet
-	                	}
-
-	                	
-	                
-	                	
+	                	//update the chatlog with new message
+	                	chatLog.addMessage(message, recipients);
+	
 	                }
 	                else if(message.getType() == MessageType.LOGOUT) {
+	                	running = false;
 	                	// Close the connection with the client if they logout of the system
-                        if (loggedInUser != null) {
-                        	
+                        if (loggedInUser != null) {	
                         	// Remove the connected client from the list of connected clients (Jesse's suggestion)
                         	ConnectedClient connectedUser = new ConnectedClient(loggedInUser, objectOutputStream);
                         	removeConnectedClient(connectedUser);
-                        	
-//                            removeConnectedClient(loggedInUser);
+                        	// removeConnectedClient(loggedInUser);
                         }
+	                	logout(objectOutputStream,socket, inputStream, outputStream);
 
-                        NetworkMessage failMessage = new NetworkMessage();
-                        failMessage.setStatus(MessageStatus.FAIL);
-                        objectOutputStream.writeObject(failMessage);
-
-                        socket.close();
-                        inputStream.close();
-                        outputStream.close();
-                        System.out.println("Closed: " + socket);
 	                }
 	                else { //type == UNDEFINED
 	                    System.out.println("Error:" + socket);
@@ -207,7 +173,30 @@ public class Server {
         return false;
     }	
 
-    public static void sendMessage(ArrayList<User> userRecipients, NetworkMessage message) {
+    public static void logout(ObjectOutputStream objectOutputStream, Socket socket, InputStream inputStream,
+			OutputStream outputStream) {
+		// TODO Auto-generated method stub
+    	NetworkMessage failMessage = new NetworkMessage();
+        failMessage.setStatus(MessageStatus.FAIL);
+        try {
+        objectOutputStream.writeObject(failMessage);
+
+        socket.close();
+        inputStream.close();
+        outputStream.close();
+        System.out.println("Closed: " + socket);
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+        }
+	}
+
+	public static void logout(User loggedInUser) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void sendMessage(ArrayList<User> userRecipients, NetworkMessage message) {
     	//logic to send messages to connected recipients
     	for(ConnectedClient client : connectedClients) {
     		for(User recipient : userRecipients) {
