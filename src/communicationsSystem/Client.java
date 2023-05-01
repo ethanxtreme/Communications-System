@@ -42,8 +42,12 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
+        // TODO debugging tool:
+        System.out.print("Type 'login' to test loggin in, otherwise, messaging will be tested: ");
+        String testType = sc.nextLine();
+        
         // TODO trying to call GUI from client
-        GUI gui = new GUI("login", false);
+        GUI gui = new GUI(testType, false);
         
         // User login
         System.out.print("Enter your username: ");

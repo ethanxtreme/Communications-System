@@ -8,6 +8,15 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+
+// the only solution I think might work is connecting the GUI to the server so that it can have
+// access to functions and info that server contains
+
+// also because I need to know what user is sending the message in order to write the name of
+// the sender besides each message
 
 public class GUI {
 	
@@ -155,6 +164,11 @@ public class GUI {
 	    // TODO: in real program, this will fill an array with names of other users and use that 
 	    // as the parameter
 	    
+	    // TODO fill array list with names of users
+	    ArrayList<User> users = new ArrayList<>();
+	    
+	    
+	    
 	    // for testing
 	    String [] exampleUsers = {"Select a user to message:", "Jesse", "Samantha", "EJ", "Ethan", "Apurva"};
 	    String [] exampleGroups = {"Select a group conversation:", "Communication", "BlackJack", "Banking", "Class"};
@@ -178,8 +192,33 @@ public class GUI {
 	    
 	    JButton sendButton = new JButton("Send");
 	    
-	    // imagining a 10x10 grid 
-	    // 
+	    sendButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		Date timestamp = new Date();
+	    		
+	    		// get the userID TODO hardcoded for now
+	    		User sender = new User("0001", "ethanneves", UserType.ADMIN, "1234abc");
+	    		User recipient = new User("0002", "ej", UserType.ADMIN, "12345");
+	    		
+	    		String [] recipientIds = {recipient.getId()};
+	    		
+	    		String messageId = "1";
+	    		
+	    		ChatMessage message = new ChatMessage(messageId, sender.getId(), recipientIds, messageText.getText(), timestamp);
+	    		
+	    		// TODO this only creates the message, not actually sends it
+	    		
+	    		// TODO in reality, this should put the message into the thread and then write the entire
+	    		// thread to the screen each time
+	    		if (messageText.getText().strip() != "") {
+	    			textArea.setText(textArea.getText() + sender.getUsername() + ": " + messageText.getText() + "\n");
+	    		}
+	    		// deletes the text inside the message text field
+	    		messageText.setText("");
+	    		
+	    	}
+	    });
+	    
 	    
 	    constraints.gridx = 0;
 	    constraints.gridy = 0;
