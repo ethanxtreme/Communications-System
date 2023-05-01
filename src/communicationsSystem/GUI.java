@@ -20,10 +20,12 @@ import java.util.Date;
 
 public class GUI {
 	static Client client = null;
+	static boolean isAdmin = false;
 	
 	public GUI(String window, boolean isAdmin, Client passedClient) {
 		
 		this.client = passedClient;
+		this.isAdmin = isAdmin;
 		
 		if (window.equals("login")) {
 			createLoginWindow();
@@ -92,6 +94,8 @@ public class GUI {
 				boolean success = client.login(name, pass);
 	            if (success) {
 	                JOptionPane.showMessageDialog(frame, "Login successful!");
+	                createMessageWindow(isAdmin);
+	                frame.dispose();
 	            } else {
 	                JOptionPane.showMessageDialog(frame, "Login failed. Please check your username and password.");
 	            }
