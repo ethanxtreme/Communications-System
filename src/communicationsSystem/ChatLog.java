@@ -36,13 +36,13 @@ public class ChatLog {
 		return this.numThreads;
 	}
 
-	public void addMessage(NetworkMessage message, String[] recipients) {
+	public void addMessage(NetworkMessage message, String[] participants) {
 		// Check if the thread already exists                                                                         
 		Thread existingThread = null;                                                               // TODO Auto-generated method stub
 		for (int i = 0; i < numThreads; i++) {                                         
 			Thread thread = getLog().get(i);                                                
-        	String[] threadRecipients = thread.getRecipientIds();                                   
-       	    if (Arrays.equals(threadRecipients, recipients)) { //not sure if this is the right check
+        	String[] threadParticipants = thread.getParticipantIds();                                   
+       	    if (Arrays.equals(threadParticipants, participants)) { //not sure if this is the right check
        	    	existingThread = thread;                                                            
         	    break;                                                                              
         	}                                                                                       
