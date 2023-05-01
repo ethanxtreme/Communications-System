@@ -8,6 +8,7 @@ public class Thread {
 	
 	// array of messages
 	ArrayList<ChatMessage> chatMessages = new ArrayList<>();
+	String[] participantIds = null;
 	
 	// constructors
 	public Thread() {
@@ -33,6 +34,10 @@ public class Thread {
 	    numMessages++;
 	}	
 	
+	public void addParticipants(String[] participants) {
+		this.participantIds = participants;
+	}
+	
 	// returns number of messages in thread
 	public int getNumMessages() {
 		return numMessages;
@@ -43,9 +48,9 @@ public class Thread {
 	    return chatMessages;
 	}
 
-	public String[] getRecipientIds() {
+	public String[] getParticipantIds() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.participantIds;
 	}
 	
 }
