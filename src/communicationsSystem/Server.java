@@ -191,11 +191,6 @@ public class Server {
         }
 	}
 
-	public static void logout(User loggedInUser) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public static void sendMessage(ArrayList<User> userRecipients, NetworkMessage message) {
     	//logic to send messages to connected recipients
     	for(ConnectedClient client : connectedClients) {
