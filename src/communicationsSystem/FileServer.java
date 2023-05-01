@@ -69,7 +69,17 @@ public class FileServer {
                     String[] recipientIds = fields[2].substring(1, fields[2].length() - 1).split("\\s*,\\s*");
                     String messageText = fields[3];
                     Date timeStamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(fields[4]);
+                    
+                    // Concatenate senderId and recipientIds into an array of participantIds
+                    String[] participantIds = new String[recipientIds.length + 1];
+                    participantIds[0] = senderId;
+                    for (int i = 0; i < recipientIds.length; i++) {
+                        participantIds[i + 1] = recipientIds[i];
+                    }
 
+                    // Set participantIds in the currentThread instance
+                    currentThread.addParticipants(participantIds);
+                    
                     // Create a new ChatMessage instance with the parsed fields
                     ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);
                     currentThread.addMessage(chatMessage);
