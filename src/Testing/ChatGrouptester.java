@@ -61,7 +61,10 @@ public class ChatGrouptester {
 
 	@Test
 	public void testSendGroupMessage() {
-		fail("Not yet implemented");
+		ChatGroup test_group = new ChatGroup();
+		Thread thread = new Thread();
+		Thread test_thread = new Thread();
+		assertEquals(thread, test_group.sendGroupMessage(test_thread));
 	}
 
 }
