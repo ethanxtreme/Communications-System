@@ -36,6 +36,8 @@ public class GUI {
 	}
 	
 	private static void createLoginUI(final JFrame frame){
+		
+		
 	    JPanel panel = new JPanel(new GridBagLayout());
 	    
 	    JLabel usernameLabel = new JLabel("Username:");
@@ -53,6 +55,24 @@ public class GUI {
 	    		System.exit(0);	// End program
 	        }
 	    });
+	    
+	    loginButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		String pass;
+	    		String name = usernameText.getText();
+				char[] passArray = passwordText.getPassword();
+				
+				// convert char[] to String
+				pass = new String(passArray);
+				
+				// TODO debug message
+//				JOptionPane.showMessageDialog(frame, "Logging in with username -> password = " + name + " -> " + pass);
+				// TODO here, once a login function with username and password as parameters is
+				// created, just pass name and pass into the function
+	    	}
+	    });
+	    
+	    
 	    
 	    GridBagConstraints constraints = new GridBagConstraints();
 	    constraints.anchor = GridBagConstraints.WEST;
