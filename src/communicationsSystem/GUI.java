@@ -24,6 +24,7 @@ public class GUI {
 	static String loggedInUser;
 	static Client client = null;
 	static boolean isAdmin = false;
+	static String username;
 	
 	public GUI(String window, boolean isAdmin, Client passedClient) {
 		
@@ -95,6 +96,7 @@ public class GUI {
 				// TODO here, once a login function with username and password as parameters is
 				// created, just pass name and pass into the function
 				boolean success = client.login(name, pass);
+				username = name;
 	            if (success) {
 	            	// set variable to username entered
 	            	loggedInUser = usernameText.getText();
@@ -173,10 +175,11 @@ public class GUI {
 	    
 	    JButton createGroupButton = new JButton("Create Group");
 	    JButton viewLogsButton = new JButton("View Chat Logs");
+	    
 	    // check if user is admin
-	    if (!isAdmin) {
-	    	viewLogsButton.setEnabled(false);
-	    }
+//	    if (!isAdmin) {
+//	    	viewLogsButton.setEnabled(false);
+//	    }
 	    
 	    JButton selectButton = new JButton("Select");
 	    
@@ -317,8 +320,36 @@ public class GUI {
 	    	    frame.setVisible(true);	// make visible
 	        }
 	    });
-
 	    
+	    viewLogsButton.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	//create a JFrame to display the chat logs
+	        	JFrame logsFrame = new JFrame("Viewing All Chat Logs");
+
+	        	//create a JTextArea to hold the chat logs
+	        	JTextArea logsTextArea = new JTextArea();
+	        	logsTextArea.setEditable(false);
+
+	        	//add the logsTextArea to a JScrollPane to enable scrolling
+	        	JScrollPane logsScrollPane = new JScrollPane(logsTextArea);
+
+	        	//add the logsScrollPane to the logsFrame
+	        	logsFrame.getContentPane().add(logsScrollPane);
+
+	        	//set the size and visibility of the logsFrame
+	        	logsFrame.setSize(500, 500);
+	        	logsFrame.setVisible(true);
+
+	        	//add some example chat logs to the logsTextArea
+	        	logsTextArea.append("2023-05-01 10:15:00 Jesse: Hi, how are you?\n");
+	        	logsTextArea.append("2023-05-01 10:16:00 Samantha: I'm good, thanks for asking. How about you?\n");
+	        	logsTextArea.append("2023-05-01 10:17:00 Jesse: I'm doing well too. What have you been up to lately?\n");
+	        	logsTextArea.append("2023-05-01 10:18:00 Samantha: Not much, just working on some projects. What about you?\n");
+	        	logsTextArea.append("2023-05-01 10:19:00 Jesse: Same here, just trying to get some work done.\n");
+
+	        }
+	    });
+
 	    constraints.gridx = 0;
 	    constraints.gridy = 0;
 	    panel.add(convosComboBox, constraints);
