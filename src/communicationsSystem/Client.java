@@ -29,7 +29,8 @@ public class Client {
     	
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the port number to connect to: <1234>");
-        int port = Integer.parseInt(sc.nextLine());
+//        int port = Integer.parseInt(sc.nextLine());
+        int port = 1234;
         
         // Get the local host's IP address
         InetAddress localhost = InetAddress.getLocalHost();
