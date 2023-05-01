@@ -103,23 +103,13 @@ public class Server {
 	                	for(int i = 0; i < recipients.length; i ++) {
 	                		userRecipients.add(getUserById(recipients[i], users));
 	                	}
-	                	//userRecipients holds array list of users to send message to
 	                	
-	                	//logic to send messages to connected recipients
-	                	for(ConnectedClient client : connectedClients) {
-	                		for(User recipient : userRecipients) {
-		                		if(client.getUser().equals(recipient)) {
-		                			ObjectOutputStream sendTo = client.getOutputStream();
-		                			//then send the text in the chatmessage to appropriate users
-		    	                	NetworkMessage messageToSend = new NetworkMessage();
-		    	                	messageToSend.setType(MessageType.TEXT);
-		    	                	messageToSend.setStatus(MessageStatus.SUCCESS);
-		    	                	messageToSend.setText(message.getChatMessage().getMessageText());
-		    	                	sendTo.writeObject(messageToSend);
-		                		}
-		                	}
-	                	}
+	                	//Send the message to connected user recipients
+	                	sendMessage(userRecipients, message);
 	            
+	                	
+	                	updateChatLog(message);
+	               
 	                	// Check if the thread already exists
 	                	Thread existingThread = null;
 	                	for (int i = 0; i < chatLog.getLog().size(); i++) {
@@ -217,7 +207,30 @@ public class Server {
         return false;
     }	
 
-    public static User login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
+    public static void sendMessage(ArrayList<User> userRecipients, NetworkMessage message) {
+    	//logic to send messages to connected recipients
+    	for(ConnectedClient client : connectedClients) {
+    		for(User recipient : userRecipients) {
+        		if(client.getUser().equals(recipient)) {
+        			ObjectOutputStream sendTo = client.getOutputStream();
+        			//then send the text in the chatmessage to appropriate users
+                	NetworkMessage messageToSend = new NetworkMessage();
+                	messageToSend.setType(MessageType.TEXT);
+                	messageToSend.setStatus(MessageStatus.SUCCESS);
+                	messageToSend.setText(message.getChatMessage().getMessageText());
+                	try {
+						sendTo.writeObject(messageToSend);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		}
+        	}
+    	}
+		
+	}
+
+	public static User login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
     	String credentials = message.getLoginCredentials();
     	String[] fields = credentials.split("::"); //stored as: username::password
         String username = fields[0];
