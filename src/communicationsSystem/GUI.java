@@ -243,10 +243,10 @@ public class GUI {
 		        String responseText = "I'm busy right now. Can we talk later?";
 
 		        // Get the name of the user who received the message
-		        String recipientName = "Jane Doe"; // TODO: replace with actual name
+		        String recipientName = (String) convosComboBox.getSelectedItem(); // TODO: replace with actual name
 
 		        // Create a new message object
-		        textArea.setText(textArea.getText() + recipientName +": "+responseText);
+		        textArea.setText(textArea.getText() + recipientName +": "+responseText + "\n");
 		        //Message response = new Message(recipientName, responseText, new Date());
 
 	           
