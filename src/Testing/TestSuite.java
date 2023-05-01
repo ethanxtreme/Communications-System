@@ -7,7 +7,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @SuiteClasses({
 	
-	UserTester.class//GroupTester.class, etc...
+	UserTester.class, 
+	ChatGrouptester.class, 
+	ChatLogtester.class, 
+	ChatMessagetester.class, 
+	NetworkMessagetester.class, 
+	Threadtester.class
 	
 })
 public class TestSuite {
