@@ -78,13 +78,15 @@ public class FileServer {
                     // Find the sender and add the currentThread to their threads list if not already present
                     User sender = findUserById(senderId, users);
                     if (sender != null && !sender.getThreads().contains(currentThread)) {
-                        sender.getThreads().add(currentThread);
+                    	sender.addThread(currentThread);
+                        //sender.getThreads().add(currentThread);
                     }
                     // Find the recipients and add the currentThread to their threads list if not already present
                     for (String recipientId : recipientIds) {
                         User recipient = findUserById(recipientId, users);
                         if (recipient != null && !recipient.getThreads().contains(currentThread)) {
-                            recipient.getThreads().add(currentThread);
+                        	recipient.addThread(currentThread);
+                            //recipient.getThreads().add(currentThread);
                         }
                     }
                 }

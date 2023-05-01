@@ -42,6 +42,10 @@ public class User {
 		password = pass;
 	}
 	
+	public void addThread(Thread thread) {
+		threads.add(thread);
+	}
+	
 	
 	// getters
 	public String getId() {
