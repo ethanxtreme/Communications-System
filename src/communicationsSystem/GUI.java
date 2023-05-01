@@ -21,6 +21,7 @@ import java.lang.Thread;
 // the sender besides each message
 
 public class GUI {
+	static String loggedInUser;
 	static Client client = null;
 	static boolean isAdmin = false;
 	
@@ -95,6 +96,8 @@ public class GUI {
 				// created, just pass name and pass into the function
 				boolean success = client.login(name, pass);
 	            if (success) {
+	            	// set variable to username entered
+	            	loggedInUser = usernameText.getText();
 	                JOptionPane.showMessageDialog(frame, "Login successful!");
 	                createMessageWindow(isAdmin);
 	                frame.dispose();
@@ -221,7 +224,7 @@ public class GUI {
 	    		String time = timestamp.toString();
 	    		
 	    		// get the userID TODO hardcoded for now
-	    		User sender = new User("0001", "ethanneves", UserType.ADMIN, "1234abc");
+	    		User sender = new User("0001", loggedInUser, UserType.ADMIN, "1234abc");
 	    		User recipient = new User("0002", "ej", UserType.ADMIN, "12345");
 	    		
 	    		String [] recipientIds = {recipient.getId()};
