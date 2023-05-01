@@ -175,6 +175,8 @@ public class GUI {
 	    	viewLogsButton.setEnabled(false);
 	    }
 	    
+	    JButton selectButton = new JButton("Select");
+	    
 	    // TODO: in real program, this will fill an array with names of other users and use that 
 	    // as the parameter
 	    
@@ -199,12 +201,18 @@ public class GUI {
 	    
 	    // label for what conversation is being viewed
 	    String exampleConversation = "BlackJack";
-	    JLabel conversationLabel = new JLabel("Currently messaging: " + exampleConversation);
+	    JLabel conversationLabel = new JLabel("Currently messaging: " + exampleUsers[convosComboBox.getSelectedIndex()]);
 	    
 	    // text field for sending a message
 	    JTextField messageText = new JTextField(45);
 	    
 	    JButton sendButton = new JButton("Send");
+	    
+	    selectButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		conversationLabel.setText("Currently messaging: " + exampleUsers[convosComboBox.getSelectedIndex()]);
+	    	}
+	    });
 	    
 	    sendButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -288,14 +296,17 @@ public class GUI {
 	    
 	    constraints.gridx = 1; //was 1
 	    constraints.gridy = 0; //was 0
-	    constraints.gridwidth = 2; //was not here
+//	    constraints.gridwidth = 2; //was not here
 	    panel.add(conversationLabel, constraints);
 	    
 	    constraints.gridx = 1; //was 1
 	    constraints.gridy = 1; //was 1
-	    constraints.gridwidth = 2; //was not here
-
+//	    constraints.gridwidth = 2; //was not here
 	    panel.add(messagesScrollPane, constraints);
+	    
+	    constraints.gridx = 0;
+	    constraints.gridy = 2;
+	    panel.add(selectButton, constraints);
 	    
 	    constraints.gridx = 0;
 	    constraints.gridy = 5;
