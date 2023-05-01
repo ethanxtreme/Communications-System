@@ -19,8 +19,11 @@ import java.util.Date;
 // the sender besides each message
 
 public class GUI {
+	static Client client = null;
 	
-	public GUI(String window, boolean isAdmin) {
+	public GUI(String window, boolean isAdmin, Client passedClient) {
+		
+		this.client = passedClient;
 		
 		if (window.equals("login")) {
 			createLoginWindow();
@@ -86,7 +89,12 @@ public class GUI {
 //				JOptionPane.showMessageDialog(frame, "Logging in with username -> password = " + name + " -> " + pass);
 				// TODO here, once a login function with username and password as parameters is
 				// created, just pass name and pass into the function
-				
+				boolean success = client.login(name, pass);
+	            if (success) {
+	                JOptionPane.showMessageDialog(frame, "Login successful!");
+	            } else {
+	                JOptionPane.showMessageDialog(frame, "Login failed. Please check your username and password.");
+	            }
 				
 	    	}
 	    });

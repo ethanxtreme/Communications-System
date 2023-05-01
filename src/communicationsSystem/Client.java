@@ -19,8 +19,14 @@ import java.util.Scanner;
  */
 
 public class Client {
+	private static GUI gui;
+	private static ObjectOutputStream objectOutputStream;
+	private static ObjectInputStream objectInputStream;
 	
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+    	// create a new instance of the Client class
+        Client client = new Client();
+    	
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the port number to connect to: <1234>");
         int port = Integer.parseInt(sc.nextLine());
@@ -36,18 +42,22 @@ public class Client {
 
         // Output stream socket
         OutputStream outputStream = socket.getOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        //ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream = new ObjectOutputStream(outputStream);
 
         // Input stream socket
         InputStream inputStream = socket.getInputStream();
-        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        //ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        objectInputStream = new ObjectInputStream(inputStream);
 
         // TODO debugging tool:
         System.out.print("Type 'login' to test loggin in, otherwise, messaging will be tested: ");
         String testType = sc.nextLine();
         
         // TODO trying to call GUI from client
-        GUI gui = new GUI(testType, false);
+        // create the GUI and pass the client instance to the constructor
+        GUI gui = new GUI(testType, false, client);
+        client.setGUI(gui);
         
         // User login
         System.out.print("Enter your username: ");
@@ -55,7 +65,6 @@ public class Client {
         System.out.print("Enter your password: ");
         String password = sc.nextLine();
         
-
         NetworkMessage loginMessage = new NetworkMessage();
         loginMessage.setType(MessageType.LOGIN);
         loginMessage.setLoginCredentials(username + "::" + password);
@@ -124,8 +133,35 @@ public class Client {
         sc.close();
     }
     
-    public static void login(String username, String password) {
-    	
+    private void setGUI(GUI gui) {
+		// TODO Auto-generated method stub
+		this.gui = gui;
+	}
+
+	public static boolean login(String username, String password) {
     	System.out.println("FROM GUI, LOGIN CALLED WITH USERNAME AND PASSWORD " + username + " " + password);
+
+		NetworkMessage loginMessage = new NetworkMessage();
+		try {
+	        loginMessage.setType(MessageType.LOGIN);
+	        loginMessage.setLoginCredentials(username + "::" + password);
+	        objectOutputStream.writeObject(loginMessage);
+	        NetworkMessage receivedMessage = null;
+	        receivedMessage = (NetworkMessage) objectInputStream.readObject();
+	        if (receivedMessage.getStatus().equals(MessageStatus.SUCCESS)) {
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
+		} catch(IOException | ClassNotFoundException e) {
+            System.out.println("Error: Unexpected end of stream");
+		}
+		return false;
+  
+    	
+    	//gui.updateUI();
     }
+    
+    
+    
 }
