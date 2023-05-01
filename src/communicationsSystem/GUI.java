@@ -266,10 +266,14 @@ public class GUI {
 	        public void actionPerformed(ActionEvent e) {
 	            JFrame frame = new JFrame("Create Group");
 	            JPanel panel = new JPanel();
+	            JLabel groupLabel = new JLabel("Enter the name of the group:");
+	            JTextField groupTextField = new JTextField(20);
 	            JLabel label = new JLabel("Enter usernames of group members separated by commas:");
 	            JTextField textField = new JTextField(20);
 	            JButton button = new JButton("Create");
 
+	            panel.add(groupLabel);
+	            panel.add(groupTextField);
 	            panel.add(label);
 	            panel.add(textField);
 	            panel.add(button);
@@ -281,14 +285,15 @@ public class GUI {
 	            button.addActionListener(new ActionListener() {
 	                @Override
 	                public void actionPerformed(ActionEvent e) {
+	                    String groupName = groupTextField.getText();
 	                    String input = textField.getText();
-	                    // Parse the usernames from the input string and add them to the group
-	                    // ...
+	                    //chatGroups.add(new ChatGroup(groupName, usernames)); // assuming groupList is a List<Group>
 	                    frame.dispose();
 	                }
 	            });
 	        }
 	    });
+
 	    
 	    constraints.gridx = 0;
 	    constraints.gridy = 0;
