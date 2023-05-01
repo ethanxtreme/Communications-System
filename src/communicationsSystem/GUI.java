@@ -217,6 +217,7 @@ public class GUI {
 	    sendButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		Date timestamp = new Date();
+	    		String time = timestamp.toString();
 	    		
 	    		// get the userID TODO hardcoded for now
 	    		User sender = new User("0001", "ethanneves", UserType.ADMIN, "1234abc");
@@ -233,7 +234,7 @@ public class GUI {
 	    		// TODO in reality, this should put the message into the thread and then write the entire
 	    		// thread to the screen each time
 	    		if (messageText.getText().strip() != "") {
-	    			textArea.setText(textArea.getText() + sender.getUsername() + ": " + messageText.getText() + "\n");
+	    			textArea.setText(timestamp + "\n" + textArea.getText() + sender.getUsername() + ": " + messageText.getText() + "\n");
 	    		}
 	    		// deletes the text inside the message text field
 	    		messageText.setText("");
