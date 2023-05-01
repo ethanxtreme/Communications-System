@@ -41,11 +41,15 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
+        // TODO trying to call GUI from client
+        GUI gui = new GUI("login", false);
+        
         // User login
         System.out.print("Enter your username: ");
         String username = sc.nextLine();
         System.out.print("Enter your password: ");
         String password = sc.nextLine();
+        
 
         NetworkMessage loginMessage = new NetworkMessage();
         loginMessage.setType(MessageType.LOGIN);

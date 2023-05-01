@@ -9,10 +9,19 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class GUI {
-	public static void main(String[] args) {
-	    createLoginWindow();  		// commented out for demonstration purposes
-//		createMessageWindow(true);   // boolean parameter is true for admin, false for other users
-	   }
+//	public static void main(String[] args) {
+//	    createLoginWindow();  		// commented out for demonstration purposes
+////		createMessageWindow(true);   // boolean parameter is true for admin, false for other users
+//	   }
+	
+	public GUI(String window, boolean isAdmin) {
+		if (window.equals("login")) {
+			createLoginWindow();
+		}
+		else {
+			createMessageWindow(isAdmin);
+		}
+	}
 	
 	private static void createLoginWindow() {    
 		JFrame frame = new JFrame("Log in");
