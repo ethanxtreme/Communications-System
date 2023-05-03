@@ -31,7 +31,7 @@ public class Server {
 	public static void main(String[] args) throws Exception {
         try (var listener = new ServerSocket(1234)) {
             System.out.println("The Communications Server is running...");
-	    ExecutorService executor = Executors.newCachedThreadPool(); //used a seperate thread for each connected client for improved 
+	    ExecutorService executor = Executors.newFixedThreadPool(100); //used a seperate thread for each connected client for improved 
             //var pool = Executors.newFixedThreadPool(100);
             //load in user data and chatlog data data from files
             FileServer fileServer = new FileServer();
