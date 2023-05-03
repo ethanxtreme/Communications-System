@@ -31,14 +31,17 @@ public class Server {
 	public static void main(String[] args) throws Exception {
         try (var listener = new ServerSocket(1234)) {
             System.out.println("The Communications Server is running...");
-            var pool = Executors.newFixedThreadPool(100);
+	    ExecutorService executor = Executors.newCachedThreadPool(); //used a seperate thread for each connected client for improved 
+            //var pool = Executors.newFixedThreadPool(100);
             //load in user data and chatlog data data from files
             FileServer fileServer = new FileServer();
             ArrayList<User> users = fileServer.loadUsers();
             ChatLog chatLog = new ChatLog(fileServer.loadChatLog(users));
             
             while (true) {
-                pool.execute(new CommunicationsServer(listener.accept(), users, chatLog));
+		Socket socket = listener.accept();
+                executor.submit(new CommunicationsServer(socket, users, chatLog));    
+                //pool.execute(new CommunicationsServer(listener.accept(), users, chatLog));
             }
         }
     }
