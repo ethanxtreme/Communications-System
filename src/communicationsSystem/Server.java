@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class Server {
 	public static void main(String[] args) throws Exception {
         try (var listener = new ServerSocket(1234)) {
             System.out.println("The Communications Server is running...");
-	    ExecutorService executor = Executors.newFixedThreadPool(100); //used a seperate thread for each connected client for improved 
+	    ExecutorService executor = Executors.newFixedThreadPool(100); //used a seperate thread for each connected client for improved
             //var pool = Executors.newFixedThreadPool(100);
             //load in user data and chatlog data data from files
             FileServer fileServer = new FileServer();

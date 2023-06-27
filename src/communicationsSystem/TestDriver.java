@@ -22,7 +22,7 @@ public class TestDriver {
 		defaultUser = new User();
 		
 		System.out.println("Creating user with all fields set: ");
-		testUser = new User("testId", "User123", UserType.USER, "Password777", testGroups);
+		testUser = new User("testId", "User123", UserType.USER, "Password777");
 		
 		System.out.println("ID, USERNAME, USERTYPE, PASSWORD, GROUPS");
 		System.out.println(testUser.getId() + " " + testUser.getUsername() + " " + testUser.getType() + " " +  
