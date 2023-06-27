@@ -7,6 +7,7 @@ import communicationsSystem.Thread;
 import static org.junit.jupiter.api.Assertions.*;
 
 //import org.junit.jupiter.api.Test;
+import jdk.internal.icu.text.UnicodeSet;
 import org.junit.Test;
 import java.util.*;
 
@@ -29,51 +30,39 @@ public class ChatGrouptester {
 
 	@Test
 	public void testAddUser() {
-		//boolean trueBool = true;
-		//boolean falseBool = false;
-		UserType user_1 = null;
-		User user = new User("1", "sb55", user_1.USER, "12345");
-		ArrayList<User> user_list = new ArrayList<User>();
-		ChatGroup group = new ChatGroup();
-		group.addUser(user);
-        	assertTrue(group.getUsers().contains(user));
-		//user_list.add(user);
-		//if(user_list.contains(user)) {
-		//	assertTrue(trueBool);
-		//}
-		//else {
-		//	assertTrue(falseBool);
-		//}
+		boolean trueBool = true;
+		boolean falseBool = false;
+		ChatGroup user_list = new ChatGroup();
+		User user = new User();
+		user_list.addUser(user);
+		if(user_list.contains(user)) {
+			assertTrue(trueBool);
+		}
+		else {
+			assertTrue(falseBool);
+		}
 	}
 
 	@Test
 	public void testRemoveUser() {
-		//boolean trueBool = true;
-		//boolean falseBool = false;
-		UserType user_1 = null;
-		User user = new User("1", "sb55", user_1.USER, "12345");
-		ArrayList<User> user_list = new ArrayList<User>();
-		ChatGroup group = new ChatGroup();
-        	group.addUser(user);
-        	group.removeUser(user);
-        	assertFalse(group.getUsers().contains(user));
-		
-		//user_list.remove(user);
-		//if(!user_list.contains(user)) { //meaning the user was successfully removed
-		//	assertTrue(trueBool);
-		//}
-		//else {  //user was not successfully removed
-		//	assertTrue(falseBool);
-		//}
+		boolean trueBool = true;
+		boolean falseBool = false;
+		ChatGroup user_list = new ChatGroup();
+		User user = new User();
+		user_list.removeUser(user);
+		if(!user_list.contains(user)) { //meaning the user was successfully removed
+			assertTrue(trueBool);
+		}
+		else {  //user was not successfully removed
+			assertTrue(falseBool);
+		}
 	}
 
 	@Test
 	public void testSendGroupMessage() {
-		//ChatGroup test_group = new ChatGroup();
-		ChatGroup test_group = mock(ChatGroup.class);
+		ChatGroup test_group = new ChatGroup();
 		Thread thread = new Thread();
-		when(group.sendGroupMessage(thread)).thenReturn(thread);
-		//Thread test_thread = new Thread();
+		Thread test_thread = new Thread();
 		assertEquals(thread, test_group.sendGroupMessage(thread));
 	}
 

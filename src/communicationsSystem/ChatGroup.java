@@ -23,6 +23,10 @@ public class ChatGroup {
 			}
 		}
 	}
+
+	public boolean contains(User user) {
+		return user_list.contains(user);
+	}
 	
 	public Thread sendGroupMessage(Thread message) {
 		return message;
