@@ -1,5 +1,5 @@
 package Testing;
-import communicationsSystem.ChatMessage;
+import communicationsSystem.model.ChatMessage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;

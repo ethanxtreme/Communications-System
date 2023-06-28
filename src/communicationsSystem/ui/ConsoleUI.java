@@ -1,4 +1,4 @@
-package communicationsSystem;
+package communicationsSystem.ui;
 // TODO don't start until a rough GUI outline has been created
 
 

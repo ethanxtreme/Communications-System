@@ -1,7 +1,7 @@
 package Testing;
-import communicationsSystem.Thread;
-import communicationsSystem.User;
-import communicationsSystem.UserType;
+import communicationsSystem.model.Thread;
+import communicationsSystem.model.User;
+import communicationsSystem.model.UserType;
 
 import static org.junit.jupiter.api.Assertions.*;
 

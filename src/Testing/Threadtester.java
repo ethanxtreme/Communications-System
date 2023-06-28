@@ -1,6 +1,6 @@
 package Testing;
-import communicationsSystem.Thread;
-import communicationsSystem.ChatMessage;
+import communicationsSystem.model.Thread;
+import communicationsSystem.model.ChatMessage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

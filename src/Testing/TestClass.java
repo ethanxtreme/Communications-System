@@ -1,4 +1,4 @@
-package communicationsSystem;
+package Testing;
 
 public class TestClass {
 

@@ -1,4 +1,9 @@
-package communicationsSystem;
+package communicationsSystem.fileManagement;
+import communicationsSystem.model.ChatMessage;
+import communicationsSystem.model.Thread;
+import communicationsSystem.model.User;
+import communicationsSystem.model.UserType;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,4 +1,9 @@
-package communicationsSystem;
+package communicationsSystem.network;
+
+import communicationsSystem.ui.GUI;
+import communicationsSystem.model.ChatMessage;
+import communicationsSystem.model.MessageStatus;
+import communicationsSystem.model.MessageType;
 
 import java.io.*;
 import java.net.InetAddress;

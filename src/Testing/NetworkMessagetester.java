@@ -1,8 +1,8 @@
 package Testing;
-import communicationsSystem.NetworkMessage;
-import communicationsSystem.MessageType;
-import communicationsSystem.MessageStatus;
-import communicationsSystem.ChatMessage;
+import communicationsSystem.network.NetworkMessage;
+import communicationsSystem.model.MessageType;
+import communicationsSystem.model.MessageStatus;
+import communicationsSystem.model.ChatMessage;
 
 import static org.junit.jupiter.api.Assertions.*;
 

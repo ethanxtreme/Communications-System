@@ -1,4 +1,10 @@
-package communicationsSystem;
+package communicationsSystem.network;
+
+import communicationsSystem.model.ChatLog;
+import communicationsSystem.fileManagement.FileServer;
+import communicationsSystem.model.MessageStatus;
+import communicationsSystem.model.MessageType;
+import communicationsSystem.model.User;
 
 import java.io.*;
 import java.net.ServerSocket;

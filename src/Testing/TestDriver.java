@@ -1,5 +1,9 @@
-package communicationsSystem;
+package Testing;
 // driver for testing use cases
+
+import communicationsSystem.model.ChatGroup;
+import communicationsSystem.model.User;
+import communicationsSystem.model.UserType;
 
 public class TestDriver {
 

@@ -1,4 +1,5 @@
-package communicationsSystem;
+package communicationsSystem.model;
+
 import java.util.*;
 
 public class ChatGroup {

@@ -1,4 +1,4 @@
-package communicationsSystem;
+package communicationsSystem.model;
 import java.util.Date;
 import java.io.Serializable;
 

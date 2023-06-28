@@ -1,7 +1,12 @@
-package communicationsSystem;
+package communicationsSystem.ui;
 
 
 // Communications system GUI 
+
+import communicationsSystem.model.ChatMessage;
+import communicationsSystem.model.User;
+import communicationsSystem.model.UserType;
+import communicationsSystem.network.Client;
 
 import javax.swing.*;
 import java.awt.*;

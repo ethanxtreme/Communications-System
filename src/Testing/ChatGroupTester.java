@@ -1,27 +1,27 @@
 package Testing;
-import communicationsSystem.ChatGroup;
-import communicationsSystem.User;
-import communicationsSystem.Thread;
+import communicationsSystem.model.ChatGroup;
+import communicationsSystem.model.User;
+import communicationsSystem.model.Thread;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 //import org.junit.jupiter.api.Test;
 import org.junit.Test;
 
-public class ChatGrouptester {
+public class ChatGroupTester {
 	
 	String groupname = "Group1";
 
 	@Test
-	public void testSetgroupname() {
+	public void testSetGroupName() {
 		assertEquals("Groupname", groupname);
 	}
 
 	@Test
-	public void testGetgroupname() {
+	public void testGetGroupName() {
 		ChatGroup group = new ChatGroup();
 		group.setGroupName(groupname);
-		assertEquals("Groupname", group.getgroupname());
+		assertEquals("Groupname", group.getGroupName());
 		
 	}
 
