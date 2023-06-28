@@ -1,14 +1,15 @@
-package communicationsSystem;
+package communicationsSystem.model;
+
 import java.util.*;
 
 public class ChatGroup {
 	public String groupName;
-	public ArrayList<User> user_list = new ArrayList<User>();
-	
-	public void setgroupname(String groupName) {
+	public ArrayList<User> user_list = new ArrayList<>();
+
+	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	public String getgroupname() {
+	public String getGroupName() {
 		return groupName;
 	}
 	
@@ -18,9 +19,7 @@ public class ChatGroup {
 	
 	public void removeUser(User userId) {
 		for(int i = 0; i < user_list.size(); i++) {
-			if(user_list.get(i).equals(userId)) {
-				user_list.remove(i);
-			}
+			if(user_list.get(i).equals(userId)) user_list.remove(i);
 		}
 	}
 

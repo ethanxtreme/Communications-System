@@ -1,4 +1,6 @@
-package communicationsSystem;
+package communicationsSystem.model;
+import communicationsSystem.model.ChatMessage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

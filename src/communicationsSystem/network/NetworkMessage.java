@@ -1,4 +1,8 @@
-package communicationsSystem;
+package communicationsSystem.network;
+import communicationsSystem.model.ChatMessage;
+import communicationsSystem.model.MessageStatus;
+import communicationsSystem.model.MessageType;
+
 import java.io.Serializable;
 
 public class NetworkMessage implements Serializable {

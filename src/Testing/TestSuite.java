@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	
 	UserTester.class, 
-	ChatGrouptester.class, 
+	ChatGroupTester.class,
 	ChatLogtester.class, 
 	ChatMessagetester.class, 
 	NetworkMessagetester.class, 

@@ -1,13 +1,12 @@
 package Testing;
-import communicationsSystem.ChatLog;
-import communicationsSystem.Thread;
+import communicationsSystem.model.ChatLog;
+import communicationsSystem.model.Thread;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 //import org.junit.jupiter.api.Test;
 import org.junit.Test;
 import java.util.*;
-import org.junit.Assert;
 
 public class ChatLogtester {
 

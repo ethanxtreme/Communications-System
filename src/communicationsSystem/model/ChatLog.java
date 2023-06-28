@@ -1,7 +1,7 @@
-package communicationsSystem;
+package communicationsSystem.model;
 import java.util.*;
 
-import communicationsSystem.Thread;
+import communicationsSystem.network.NetworkMessage;
 
 public class ChatLog {
 	//private Map<String, Thread> chatLog; 
