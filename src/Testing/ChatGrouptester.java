@@ -1,15 +1,12 @@
 package Testing;
 import communicationsSystem.ChatGroup;
 import communicationsSystem.User;
-import communicationsSystem.UserType;
 import communicationsSystem.Thread;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 //import org.junit.jupiter.api.Test;
-import jdk.internal.icu.text.UnicodeSet;
 import org.junit.Test;
-import java.util.*;
 
 public class ChatGrouptester {
 	
@@ -23,7 +20,7 @@ public class ChatGrouptester {
 	@Test
 	public void testGetgroupname() {
 		ChatGroup group = new ChatGroup();
-		group.setgroupname(groupname);
+		group.setGroupName(groupname);
 		assertEquals("Groupname", group.getgroupname());
 		
 	}

@@ -73,11 +73,10 @@ public class FileServer {
                     // Concatenate senderId and recipientIds into an array of participantIds
                     String[] participantIds = new String[recipientIds.length + 1];
                     participantIds[0] = senderId;
-                    for (int i = 0; i < recipientIds.length; i++) {
-                        participantIds[i + 1] = recipientIds[i];
-                    }
+                    System.arraycopy(recipientIds, 0, participantIds, 1, recipientIds.length);
 
                     // Set participantIds in the currentThread instance
+                    assert currentThread != null;
                     currentThread.addParticipants(participantIds);
                     
                     // Create a new ChatMessage instance with the parsed fields
@@ -150,7 +149,7 @@ public class FileServer {
                     messages.setLength(messages.length() - 1);
                 }
                 // Write the concatenated chat messages to the file
-                pw.println(messages.toString());
+                pw.println(messages);
             }
         } catch (IOException e) {
             e.printStackTrace();
