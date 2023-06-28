@@ -136,8 +136,7 @@ public class Client {
             loginMessage.setType(MessageType.LOGIN);
             loginMessage.setLoginCredentials(username + "::" + password);
             objectOutputStream.writeObject(loginMessage);
-            NetworkMessage receivedMessage = null;
-            receivedMessage = (NetworkMessage) objectInputStream.readObject();
+            NetworkMessage receivedMessage = (NetworkMessage) objectInputStream.readObject();
             return receivedMessage.getStatus().equals(MessageStatus.SUCCESS);
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error: Unexpected end of stream");
