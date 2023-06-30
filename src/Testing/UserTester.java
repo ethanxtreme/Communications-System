@@ -1,102 +1,102 @@
 package Testing;
-import communicationsSystem.model.Thread;
+
+import communicationsSystem.model.ChatMessage;
 import communicationsSystem.model.User;
 import communicationsSystem.model.UserType;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
-//import org.junit.jupiter.api.Test;
+import communicationsSystem.model.Thread;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import static org.junit.Assert.*;
+
 public class UserTester {
-	
-	User test_user = new User();
-	UserType type = null;
-	User test_user1 = new User("000", "mb123", type.USER, "12345");
-	
-	@Test
-    public void testUser() { //default constructor
-		System.out.println("testUser id" + test_user.getId());
-		System.out.println("testUser username" + test_user.getUsername());
-		System.out.println("testUser password" + test_user.getPassword());
-		System.out.println("testUser type" + test_user.getType());
-    }
-	
-	@Test
-    public void testUserConstructor() { //constructor
-		assertEquals("000", test_user1.getId());
-		assertEquals("mb123", test_user1.getUsername());
-		assertEquals(type.USER, test_user1.getPassword());
-    }
-	
-	@Test
-	public void testsetId() {
-		test_user.setId("001");
-		assertEquals("001", test_user.getId());
+
+	private User user;
+
+	@Before
+	public void setUp() {
+		user = new User("1", "john_doe", UserType.USER, "password");
 	}
-	
+
 	@Test
-	public void testsetUsername() {
-		test_user.setUsername("hi123");
-		assertEquals("hi123", test_user.getUsername());
+	public void testDefaultConstructor() {
+		User defaultUser = new User();
+		assertEquals("", defaultUser.getId());
+		assertEquals("", defaultUser.getUsername());
+		assertEquals(UserType.USER, defaultUser.getType());
+		assertEquals("", defaultUser.getPassword());
+		assertEquals(new ArrayList<>(), defaultUser.getThreads());
 	}
-	
+
 	@Test
-	public void testsetType() {
-		test_user.setType(type.USER);
-		assertEquals(type.USER, test_user.getUsername());
+	public void testParameterizedConstructor() {
+		assertEquals("1", user.getId());
+		assertEquals("john_doe", user.getUsername());
+		assertEquals(UserType.USER, user.getType());
+		assertEquals("password", user.getPassword());
+		assertEquals(new ArrayList<>(), user.getThreads());
 	}
-	
+
 	@Test
-	public void testsetPassword() {
-		test_user.setPassword("6789");
-		assertEquals("6789", test_user.getPassword());
+	public void testSetId() {
+		user.setId("2");
+		assertEquals("2", user.getId());
 	}
-	
+
 	@Test
-	public void testaddThread() {
-		boolean trueBool = true;
-		boolean falseBool = false;
-		Thread test_thread = new Thread();
-		ArrayList<Thread> test_threadarr = new ArrayList<Thread>();
-		test_threadarr.add(test_thread);
-		if(test_threadarr.contains(test_thread)) {
-			assertTrue(trueBool);
-		}
-		else {
-			assertTrue(falseBool);
-		}
+	public void testSetUsername() {
+		user.setUsername("jane_doe");
+		assertEquals("jane_doe", user.getUsername());
 	}
-	
+
 	@Test
-	public void testgetId() {
-		assertEquals("000", test_user1.getId());
-		
+	public void testSetType() {
+		user.setType(UserType.ADMIN);
+		assertEquals(UserType.ADMIN, user.getType());
 	}
-	
+
 	@Test
-	public void testgetUsername() {
-		assertEquals("mb123", test_user1.getUsername());
+	public void testSetPassword() {
+		user.setPassword("new_password");
+		assertEquals("new_password", user.getPassword());
 	}
-	
+
 	@Test
-	public void testgetType() {
-		assertEquals(type.USER, test_user1.getType());
+	public void testAddThread() {
+		Thread thread = new Thread();
+		user.addThread(thread);
+		assertTrue(user.getThreads().contains(thread));
 	}
-	
+
 	@Test
-	public void testgetPassword() {
-		assertEquals("12345", test_user1.getPassword());
+	public void testLogin() {
+		// Call the login method
+		user.login("password");
+
+		// TODO: Add assertions or additional verification for the login method
 	}
-	
+
 	@Test
-	public void testgetThreads() {
-		Thread test_thread = new Thread();
-		ArrayList<Thread> test_threadarr = new ArrayList<Thread>();
-		test_threadarr.add(test_thread);
-		assertEquals(test_threadarr, test_thread.getThread());
+	public void testMessage() {
+		String messageId = "123";
+		String senderId = "user1";
+		String[] recipientIds = {"user2", "user3"};
+		String messageText = "Hello, world!";
+		Date timeStamp = new Date();
+		ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);
+		String recipientUsername = "jane_doe";
+
+		// TODO: Add assertions or additional verification for the message method
+	}
+
+	@Test
+	public void testViewLogs() {
+		// Call the viewLogs method
+		user.viewLogs();
+
+		// TODO: Add assertions or additional verification for the viewLogs method
 	}
 }
-

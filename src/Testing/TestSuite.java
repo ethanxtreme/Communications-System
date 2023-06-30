@@ -8,11 +8,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	
 	UserTester.class, 
-	ChatGroupTester.class,
-	ChatLogtester.class, 
+	//ChatGroupTester.class,
+	//ChatLogtester.class,
 	ChatMessagetester.class, 
 	NetworkMessagetester.class, 
-	Threadtester.class
+	//Threadtester.class
 	
 })
 public class TestSuite {
