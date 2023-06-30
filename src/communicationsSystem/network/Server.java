@@ -1,7 +1,7 @@
 package communicationsSystem.network;
 
-import communicationsSystem.model.ChatLog;
 import communicationsSystem.fileManagement.FileServer;
+import communicationsSystem.model.ChatLog;
 import communicationsSystem.model.MessageStatus;
 import communicationsSystem.model.MessageType;
 import communicationsSystem.model.User;
@@ -63,7 +63,6 @@ public class Server {
 
     public static void logout(ObjectOutputStream objectOutputStream, Socket socket, InputStream inputStream,
                               OutputStream outputStream) {
-        // TODO Auto-generated method stub
         NetworkMessage failMessage = new NetworkMessage();
         failMessage.setStatus(MessageStatus.FAIL);
         try {
@@ -74,7 +73,6 @@ public class Server {
             outputStream.close();
             System.out.println("Closed: " + socket);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -93,7 +91,6 @@ public class Server {
                     try {
                         sendTo.writeObject(messageToSend);
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
