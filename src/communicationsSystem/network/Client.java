@@ -27,36 +27,21 @@ public class Client {
         // create a new instance of the Client class
         Client client = new Client();
 
+        // Connect to server
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the port number to connect to: <1234>");
-//        int port = Integer.parseInt(sc.nextLine());
         int port = 1234;
-
-        // Get the local host's IP address
         InetAddress localhost = InetAddress.getLocalHost();
-        System.out.println("IPV4 Address : " + (localhost.getHostAddress()).trim());
         String host = localhost.getHostAddress().trim();
-
-        // Connect to the ServerSocket at host:port
         Socket socket = new Socket(host, port);
         System.out.println("Connected to " + host + ":" + port);
 
-        // Output stream socket
+        // Output & Input Stream Sockets
         OutputStream outputStream = socket.getOutputStream();
-        //ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
         objectOutputStream = new ObjectOutputStream(outputStream);
-
-        // Input stream socket
         InputStream inputStream = socket.getInputStream();
-        //ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         objectInputStream = new ObjectInputStream(inputStream);
 
-        // TODO debugging tool:
-//        System.out.print("Type 'login' to test loggin in, otherwise, messaging will be tested: ");
-//        String testType = sc.nextLine();
-
-        // TODO trying to call GUI from client
-        // create the GUI and pass the client instance to the constructor
+        // TODO Need to figure out GUI calling logic
         GUI gui = new GUI("login", false, client);
         client.setGUI(gui);
 
@@ -153,7 +138,7 @@ public class Client {
     }
 
     private void setGUI(GUI gui) {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
 
 
