@@ -47,7 +47,7 @@ public class GUI {
 
         createLoginUI(frame);
 
-        frame.setSize(360, 200);
+        frame.setSize(500, 350);
         frame.setLocationRelativeTo(null);  // Center on screen
         frame.setVisible(true);    // make visible
 
@@ -58,7 +58,7 @@ public class GUI {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         createMessageUI(frame);
-        frame.setSize(800, 680);
+        frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);  // Center on screen
         frame.setVisible(true);    // make visible
     }
@@ -97,7 +97,7 @@ public class GUI {
             if (success) {
                 // set variable to username entered
                 loggedInUser = usernameText.getText();
-                JOptionPane.showMessageDialog(frame, "Login successful!");
+                // JOptionPane.showMessageDialog(frame, "Login successful!");
                 createMessageWindow();
                 frame.dispose();
             } else {
