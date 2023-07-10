@@ -1,0 +1,50 @@
+
+
+java:S1319ª"eThe type of "users" should be an interface such as "List" rather than the implementation "ArrayList".(×´şøÿÿÿÿ
+…
+java:S1319É"nThe type of "userRecipients" should be an interface such as "List" rather than the implementation "ArrayList".(¯ÓËâ
+|
+java:S1319à"eThe type of "users" should be an interface such as "List" rather than the implementation "ArrayList".(Óÿ–ş
+|
+java:S1319ø"eThe type of "users" should be an interface such as "List" rather than the implementation "ArrayList".(Ñ›ÌÆ
+
+java:S1319"eThe type of "users" should be an interface such as "List" rather than the implementation "ArrayList".(«êò†şÿÿÿÿ
+D
+java:S2189*""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ8ûÖüø1
+S	java:S106""9Replace this use of System.out or System.err by a logger.(È”ó§ÿÿÿÿÿ
+Q	java:S125$"<This block of commented-out lines of code should be removed.(·Ë¶™
+Q	java:S125-"<This block of commented-out lines of code should be removed.(ÃôŒ®
+`
+java:S1124?"EReorder the modifiers to comply with the Java Language Specification.(í°¥¼øÿÿÿÿ
+Z
+java:S1124D"EReorder the modifiers to comply with the Java Language Specification.(Ğ¹d
+h
+java:S3776I"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(“–ış
+S	java:S106J"9Replace this use of System.out or System.err by a logger.(ş›±şúÿÿÿÿ
+=
+java:S1125Y"'Remove the unnecessary boolean literal.(á³Ú¬
+R	java:S125"<This block of commented-out lines of code should be removed.(ûÕşÉ
+T	java:S106‡"9Replace this use of System.out or System.err by a logger.(·î³ÿûÿÿÿÿ
+T	java:S106"9Replace this use of System.out or System.err by a logger.(·î³ÿûÿÿÿÿ
+?	java:S108‘")Either remove or fill this block of code.(ï­£Ä
+O	java:S106“"9Replace this use of System.out or System.err by a logger.(çîŞÊ
+E
+java:S2093K"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+ˆ
+java:S1130ª"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(×´şøÿÿÿÿ
+T	java:S106«"9Replace this use of System.out or System.err by a logger.(ŞŞ™şùÿÿÿÿ
+N	java:S106­"9Replace this use of System.out or System.err by a logger.(¢È
+T	java:S106¯"9Replace this use of System.out or System.err by a logger.(¶Õÿˆşÿÿÿÿ
+T	java:S106³"9Replace this use of System.out or System.err by a logger.(İ˜®ğúÿÿÿÿ
+N
+java:S1135¹"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+O	java:S106Â"9Replace this use of System.out or System.err by a logger.(çîŞÊ
+N
+java:S1135Ä"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+N
+java:S1135×"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+M
+java:S1128"0Remove this unused import 'java.io.PrintWriter'.(ÓŞÏÛ8‹×üø1
+P
+java:S1128
+".Remove this unused import 'java.util.Scanner'.(ÒÜÅ¸úÿÿÿÿ8‹×üø1

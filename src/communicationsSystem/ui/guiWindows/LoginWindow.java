@@ -39,10 +39,8 @@ public class LoginWindow {
 
             // convert char[] to String
             String pass = new String(passArray);
-
-            // TODO debug message
 //				JOptionPane.showMessageDialog(frame, "Logging in with username -> password = " + name + " -> " + pass);
-            // TODO here, once a login function with username and password as parameters is
+            // once a login function with username and password as parameters is
             // created, just pass name and pass into the function
             boolean success = Client.login(name, pass);
             if (success) {

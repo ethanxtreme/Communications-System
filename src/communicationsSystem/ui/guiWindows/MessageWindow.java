@@ -65,15 +65,12 @@ public class MessageWindow {
 
         JButton selectButton = new JButton("Select");
 
-        // TODO: in real program, this will fill an array with names of other users and use that
-        // as the parameter
-
-        // TODO fill array list with names of users
+        // fill array list with names of users
         ArrayList<User> users = new ArrayList<>();
 
 
         // for testing
-        String[] exampleUsers = {"Select a user to message:", "Jesse", "Samantha", "EJ", "Ethan", "Apurva"};
+        String[] exampleUsers = {"Select a user to message:", "Jesse", "Samantha", "EJ", "Ethan"};
         String[] exampleGroups = {"Select a group conversation:", "Communication", "BlackJack", "Banking", "Class"};
 
         JComboBox<String> convosComboBox = new JComboBox<>(exampleUsers);
@@ -101,7 +98,7 @@ public class MessageWindow {
             Date timestamp = new Date();
             String time = timestamp.toString();
 
-            // get the userID TODO commented out because LoggedInUser needs to come from client object
+            // get the userID; commented out because LoggedInUser needs to come from client object
             //User sender = new User("0001", loggedInUser, UserType.ADMIN, "1234abc");
             User recipient = new User("0002", "ej", UserType.ADMIN, "12345");
 
@@ -109,13 +106,10 @@ public class MessageWindow {
 
             String messageId = "1";
 
-            // TODO commented out because LoggedInUser needs to come from client object
+            // commented out because LoggedInUser needs to come from client object
             //ChatMessage message = new ChatMessage(messageId, sender.getId(), recipientIds, messageText.getText(), timestamp);
 
-            // TODO this only creates the message, not actually sends it
-
-            // TODO in reality, this should put the message into the thread and then write the entire
-            // TODO commented out because LoggedInUser needs to come from client object
+            // TODO this only creates the message, not actually sends it, in reality, this should put the message into the thread and then write the entire
             // thread to the screen each time
             if (!Objects.equals(messageText.getText().strip(), "")) {
 //                textArea.setText(textArea.getText() + timestamp.getHours() + ":" + timestamp.getMinutes() + " " +
@@ -129,7 +123,7 @@ public class MessageWindow {
             String responseText = "I'm busy right now. Can we talk later?";
 
             // Get the name of the user who received the message
-            String recipientName = (String) convosComboBox.getSelectedItem(); // TODO: replace with actual name
+            String recipientName = (String) convosComboBox.getSelectedItem(); // TODO: should be the name of actual system users, not example list
 
             // Create a new message object
             textArea.setText(textArea.getText() + timestamp.getHours() + ":" + timestamp.getMinutes() +
