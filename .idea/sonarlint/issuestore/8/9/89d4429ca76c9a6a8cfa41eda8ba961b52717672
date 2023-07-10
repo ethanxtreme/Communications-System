@@ -1,0 +1,12 @@
+
+†
+java:S1319C"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(êÓµ
+S	java:S106M"9Replace this use of System.out or System.err by a logger.(†Ú†Çúÿÿÿÿ
+M
+java:S1135L"2Complete the task associated to this TODO comment.(—ºÏöüÿÿÿÿ
+S	java:S106T"9Replace this use of System.out or System.err by a logger.(‘ÿ¯€ÿÿÿÿÿ
+M
+java:S1135S"2Complete the task associated to this TODO comment.(—ºÏöüÿÿÿÿ
+N	java:S106]"9Replace this use of System.out or System.err by a logger.(ƒ™š£
+M
+java:S1135\"2Complete the task associated to this TODO comment.(—ºÏöüÿÿÿÿ

@@ -1,0 +1,23 @@
+
+Z
+java:S1854"?Remove this useless assignment to local variable "defaultUser".(ŒÍÃ¿ùÿÿÿÿ
+[
+java:S1854">Remove this useless assignment to local variable "testGroups".(ı«´8É²àø1
+?
+java:S1481
+")Remove this unused "temp" local variable.(æÙíÓ
+K
+java:S1481"0Remove this unused "defaultUser" local variable.(ÄŒ›¸ùÿÿÿÿ
+L
+java:S1481"/Remove this unused "testGroups" local variable.(ı«´8Ê²àø1
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ÆË°î
+V	java:S125"<This block of commented-out lines of code should be removed.(‹¾«Ïøÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ñéÚıÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.( Áøÿÿÿÿ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(¶øº¢
+S	java:S106 "9Replace this use of System.out or System.err by a logger.(×÷äœûÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(ìÇĞŞúÿÿÿÿ
+S	java:S106#"9Replace this use of System.out or System.err by a logger.(½·çÜùÿÿÿÿ
+N	java:S106("9Replace this use of System.out or System.err by a logger.(„…«
+V	java:S125$"<This block of commented-out lines of code should be removed.(êäõ®ÿÿÿÿÿ
+V	java:S125&"<This block of commented-out lines of code should be removed.(œîÒãøÿÿÿÿ

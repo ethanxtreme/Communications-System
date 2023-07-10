@@ -1,0 +1,12 @@
+
+m	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿ê³8«óêø1
+m	java:S1172"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿ê³8Âà÷ø1
+r	java:S117?"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šù¾æøÿÿÿÿ8«óêø1
+r	java:S117A"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Ê†Ïûÿÿÿÿ8ßŞúø1
+]	java:S125	"<This block of commented-out lines of code should be removed.(µ÷Œèøÿÿÿÿ8­óêø1
+a
+java:S1854A"?Remove this useless assignment to local variable "test_thread".(¦Ê†Ïûÿÿÿÿ8äŞúø1
+R
+java:S1481A"0Remove this unused "test_thread" local variable.(¦Ê†Ïûÿÿÿÿ8åŞúø1
+H
+java:S5960"+Remove this assertion from production code.(¯Ï¬Õ8²óêø1

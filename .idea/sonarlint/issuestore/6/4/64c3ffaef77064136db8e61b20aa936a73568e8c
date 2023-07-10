@@ -1,0 +1,86 @@
+
+F
+java:S3740Â"/Provide the parametrized type for this generic.(İ£¸ì
+F
+java:S3740Â"/Provide the parametrized type for this generic.(İ£¸ì
+F
+java:S3740Å"/Provide the parametrized type for this generic.(Ú¯ıÔ
+F
+java:S3740Å"/Provide the parametrized type for this generic.(Ú¯ıÔ
+?
+java:S1604Õ"(Make this anonymous inner class a lambda(Àê¸•
+?
+java:S1604˜"(Make this anonymous inner class a lambda(Èú†
+D
+java:S1604‡"(Make this anonymous inner class a lambda(è¡“‘øÿÿÿÿ
+?
+java:S1604À"(Make this anonymous inner class a lambda(–ÁÌ‡
+S
+java:S4973ï"<Strings and Boxed types should be compared using "equals()".(ığ Û
+g
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ÙÌôˆ
+3
+java:S1118"Hide this public constructor.(ğ±®†
+@
+java:S3010"#Remove this assignment of "client".(²ÁÌÌ8Í ù1
+:
+java:S3010 "$Remove this assignment of "isAdmin".(ŠÅåµ
+R
+java:S2209"5Change this instance-reference to a static reference.(²ÁÌÌ8Í ù1
+R
+java:S2209 "5Change this instance-reference to a static reference.(ŠÅåµ8Í ù1
+]	java:S125\"<This block of commented-out lines of code should be removed.(²ìçìüÿÿÿÿ8³ú£ù1
+T
+java:S1135["2Complete the task associated to this TODO comment.(—ºÏöüÿÿÿÿ8³ú£ù1
+O
+java:S1135]"2Complete the task associated to this TODO comment.(áœ¼¢8³ú£ù1
+R
+java:S2209_"5Change this instance-reference to a static reference.(æé­Ÿ8³ú£ù1
+c
+java:S1854Í"GRemove this useless assignment to local variable "exampleConversation".(±„ä÷ùÿÿÿÿ
+P
+java:S1854º"9Remove this useless assignment to local variable "users".(úÑ¤
+E
+java:S1172“".Remove this unused method parameter "isAdmin".(°Â™Ç
+Q	java:S125°"<This block of commented-out lines of code should be removed.(Ö¦®
+G
+java:S1135¶"2Complete the task associated to this TODO comment.(Ë\
+I
+java:S1135¹"2Complete the task associated to this TODO comment.(àñë˜
+A
+java:S1481º"*Remove this unused "users" local variable.(úÑ¤
+W	java:S125Ã"<This block of commented-out lines of code should be removed.(£ê¢Çÿÿÿÿÿ
+T
+java:S1481Í"8Remove this unused "exampleConversation" local variable.(±„ä÷ùÿÿÿÿ
+W
+java:S1854é";Remove this useless assignment to local variable "message".(ûå™£øÿÿÿÿ
+T
+java:S1854ß"8Remove this useless assignment to local variable "time".(­ˆ”ïøÿÿÿÿ
+E
+java:S1481ß")Remove this unused "time" local variable.(­ˆ”ïøÿÿÿÿ
+I
+java:S1135á"2Complete the task associated to this TODO comment.(À¾êØ
+H
+java:S1481é",Remove this unused "message" local variable.(ûå™£øÿÿÿÿ
+N
+java:S1135ë"2Complete the task associated to this TODO comment.(”Ñ“‹üÿÿÿÿ
+N
+java:S1135í"2Complete the task associated to this TODO comment.(ññ¨ëùÿÿÿÿ
+I
+java:S1135û"2Complete the task associated to this TODO comment.(¶›øù
+R	java:S125€"<This block of commented-out lines of code should be removed.(Å¸Ş¥
+U
+java:S1854œ"9Remove this useless assignment to local variable "input".(ÿÄÃæøÿÿÿÿ
+Y
+java:S1854›"=Remove this useless assignment to local variable "groupName".(ÃÁ©šÿÿÿÿÿ
+J
+java:S1481›".Remove this unused "groupName" local variable.(ÃÁ©šÿÿÿÿÿ
+F
+java:S1481œ"*Remove this unused "input" local variable.(ÿÄÃæøÿÿÿÿ
+W	java:S125á"<This block of commented-out lines of code should be removed.(Î˜íĞÿÿÿÿÿ
+R	java:S125ã"<This block of commented-out lines of code should be removed.(à…Â—
+9
+java:S1128
+"$Remove this unused import 'java.io'.(¬›ãD
+H
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ

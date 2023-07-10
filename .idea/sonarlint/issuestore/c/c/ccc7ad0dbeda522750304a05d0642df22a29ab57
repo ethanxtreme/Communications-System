@@ -1,0 +1,10 @@
+
+o
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(å­Õæ
+
+java:S1319"iThe type of "user_list" should be an interface such as "List" rather than the implementation "ArrayList".(å­Õæ
+p
+java:S1104"UMake groupName a static final constant or non-public and provide accessors if needed.(Ñø‘¤ÿÿÿÿÿ
+k
+java:S1104"UMake user_list a static final constant or non-public and provide accessors if needed.(å­Õæ
+i	java:S116"TRename this field "user_list" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å­Õæ

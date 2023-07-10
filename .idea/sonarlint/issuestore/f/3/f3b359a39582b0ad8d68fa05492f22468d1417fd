@@ -1,0 +1,31 @@
+
+o
+java:S2293?"YReplace the type specification in this constructor call with the diamond operator ("<>").(ø÷”÷
+o
+java:S2293a"YReplace the type specification in this constructor call with the diamond operator ("<>").(ø÷”÷
+[
+java:S1192"FDefine a constant instead of duplicating this literal "mb123" 3 times.(¡Ž‡
+k	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Ê†Ïûÿÿÿÿ
+f	java:S117?"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø÷”÷
+k	java:S117`"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Ê†Ïûÿÿÿÿ
+f	java:S117a"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø÷”÷
+V	java:S125
+"<This block of commented-out lines of code should be removed.(µ÷Œèøÿÿÿÿ
+i	java:S116"TRename this field "test_user" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£Ã„µ
+i	java:S116"URename this field "test_user1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡Ž‡
+Q
+java:S2209"5Change this instance-reference to a static reference.(¡Ž‡8Ä…ù1
+N	java:S106"9Replace this use of System.out or System.err by a logger.(Â¡¯ž
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ûË€´øÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(æÞºíøÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ÞÚ—Ëüÿÿÿÿ
+Q
+java:S2209"5Change this instance-reference to a static reference.(µ»¯q8Ä…ù1
+W
+java:S22090"5Change this instance-reference to a static reference.(•»óŠÿÿÿÿÿ8‘Ä…ù1
+W
+java:S22091"5Change this instance-reference to a static reference.(¬å¨£ûÿÿÿÿ8‘Ä…ù1
+R
+java:S2209V"5Change this instance-reference to a static reference.(Õ–²Ò8“Ä…ù1
+@
+java:S5960"+Remove this assertion from production code.(Ç¨Ó
