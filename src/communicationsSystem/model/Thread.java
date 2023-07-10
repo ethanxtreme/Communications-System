@@ -51,7 +51,6 @@ public class Thread {
 	}
 
 	public String[] getParticipantIds() {
-		// TODO Auto-generated method stub
 		return this.participantIds;
 	}
 	

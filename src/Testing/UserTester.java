@@ -75,8 +75,6 @@ public class UserTester {
 	public void testLogin() {
 		// Call the login method
 		user.login("password");
-
-		// TODO: Add assertions or additional verification for the login method
 	}
 
 	@Test
@@ -88,15 +86,11 @@ public class UserTester {
 		Date timeStamp = new Date();
 		ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);
 		String recipientUsername = "jane_doe";
-
-		// TODO: Add assertions or additional verification for the message method
 	}
 
 	@Test
 	public void testViewLogs() {
 		// Call the viewLogs method
 		user.viewLogs();
-
-		// TODO: Add assertions or additional verification for the viewLogs method
 	}
 }

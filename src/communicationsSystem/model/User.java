@@ -88,8 +88,6 @@ public class User {
     // for a GUI application, it's less necessary to code the UserType check in this class,
     // but rather have the option only available on screen in user is an ADMIN
     public void viewLogs() {
-
-        // TODO debug message
         System.out.println("View Logs successfully called.");
     }
 

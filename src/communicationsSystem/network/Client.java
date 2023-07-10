@@ -19,6 +19,9 @@ import java.util.Scanner;
  * user enters logout, send logout message to server
  */
 
+// TODO: Make multi-threaded so client can listen for messages while waiting for user input
+// TODO: Split into multiple classes
+
 public class Client {
     private static ObjectOutputStream objectOutputStream;
     private static ObjectInputStream objectInputStream;
