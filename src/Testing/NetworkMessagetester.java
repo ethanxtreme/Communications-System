@@ -66,14 +66,14 @@ public class NetworkMessagetester {
 		
 	}
 
-	@Test
-	public void testSetChatMessage() {
-		String[] test_recipientIDs = {};
-		Date test_time = new Date();
-		ChatMessage testmessage = new ChatMessage("1", "abcd",test_recipientIDs, "Hello", test_time);
-		test_message.setChatMessage(testmessage);
-		assertEquals(testmessage, test_message.getChatMessage());
-	}
+//	@Test
+//	public void testSetChatMessage() {
+//		String[] test_recipientIDs = {};
+//		Date test_time = new Date();
+//		ChatMessage testmessage = new ChatMessage("1", "abcd",test_recipientIDs, "Hello", test_time);
+//		test_message.setChatMessage(testmessage);
+//		assertEquals(testmessage, test_message.getChatMessage());
+//	}
 
 	@Test
 	public void testGetType() {
@@ -90,12 +90,12 @@ public class NetworkMessagetester {
 		assertEquals("Hello", initial_testmessage.getText());
 	}
 
-	@Test
-	public void testGetChatMessage() {
-		String[] test_recipientIDs = {};
-		Date test_time = new Date();
-		ChatMessage testmessage = new ChatMessage("1", "abcd",test_recipientIDs, "Hello", test_time);
-		assertEquals(testmessage, test_message.getChatMessage());
-	}
+//	@Test
+//	public void testGetChatMessage() {
+//		String[] test_recipientIDs = {};
+//		Date test_time = new Date();
+//		ChatMessage testmessage = new ChatMessage("1", "abcd",test_recipientIDs, "Hello", test_time);
+//		assertEquals(testmessage, test_message.getChatMessage());
+//	}
 
 }

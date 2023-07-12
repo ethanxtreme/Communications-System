@@ -1,23 +1,32 @@
 package communicationsSystem.model;
+import java.util.ArrayList;
 import java.util.Date;
 import java.io.Serializable;
 
 
 public class ChatMessage implements Serializable {
 	// Class fields
-    private String messageId;
-    private String senderId;
-    private String[] recipientIds;
+    private String messageId; // TODO: Figure out what this is for
+    private User sender;
+    private ArrayList<User> recipients;
     private String messageText;
     private Date timeStamp;
 
     // Class constructor
-    public ChatMessage(String messageId, String senderId, String[] recipientIds, String messageText, Date timeStamp) {
+    public ChatMessage(String messageId, User sender, ArrayList<User> recipientIds, String messageText, Date timeStamp) {
         this.messageId = messageId;
-        this.senderId = senderId;
-        this.recipientIds = recipientIds;
+        this.sender = sender;
+        this.recipients = recipientIds;
         this.messageText = messageText;
         this.timeStamp = timeStamp;
+    }
+
+    public ChatMessage() {
+        this.messageId = "";
+        this.sender = null;
+        this.recipients = null;
+        this.messageText = "";
+        this.timeStamp = null;
     }
 
     // Getter methods
@@ -25,12 +34,12 @@ public class ChatMessage implements Serializable {
         return messageId;
     }
 
-    public String getSenderId() {
-        return senderId;
+    public User getSender() {
+        return sender;
     }
 
-    public String[] getRecipientIds() {
-        return recipientIds;
+    public ArrayList<User> getRecipients() {
+        return recipients;
     }
 
     public String getMessageText() {
@@ -46,12 +55,12 @@ public class ChatMessage implements Serializable {
         this.messageId = messageId;
     }
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public void setRecipientIds(String[] recipientIds) {
-        this.recipientIds = recipientIds;
+    public void setRecipients(ArrayList<User> recipientIds) {
+        this.recipients = recipientIds;
     }
 
     public void setMessageText(String messageText) {

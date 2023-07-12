@@ -213,13 +213,13 @@ public class Server {
                     } else if (message.getType() == MessageType.TEXT) {
 
                         // Get the recipient list from the message
-                        String[] recipients = message.getChatMessage().getRecipientIds();
+                        ArrayList<User> recipients = message.getChatMessage().getRecipients();
                         ArrayList<User> userRecipients = new ArrayList<>();
-                        for (String recipient : recipients) {
-                            userRecipients.add(getUserById(recipient, users));
+                        for (User recipient : recipients) {
+                            //userRecipients.add(getUserById(recipient, users));
                         }
-                        String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
-                        participants[participants.length - 1] = message.getChatMessage().getSenderId();
+//                        String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
+//                        participants[participants.length - 1] = message.getChatMessage().getSenderId();
                         //update the chatlog with new message
                         //chatLog.addMessage(message, participants);
 
