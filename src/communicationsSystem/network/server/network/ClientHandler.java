@@ -1,11 +1,5 @@
 package communicationsSystem.network.server.network;
 
-// TODO: Implement client handler
-// This class would maintain the list of connected clients and provide methods
-// to add or remove clients from the list.
-
-// List of connected clients
-
 import communicationsSystem.model.ChatLog;
 import communicationsSystem.model.MessageType;
 import communicationsSystem.model.User;
@@ -16,9 +10,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// TODO: Implement client handler
-// Doesn't really do anything yet, just copied from Server
-// Server still has original code, need to get this working and remove that code
 public class ClientHandler implements Runnable {
     private static final ArrayList<ConnectedClient> connectedClients = new ArrayList<>();
     private final Socket socket;
@@ -114,6 +105,7 @@ public class ClientHandler implements Runnable {
             System.out.println("Closed: " + socket);
         }
     }
+
     // TODO: Figure out how this will be used
     public record ConnectedClient(User user, ObjectOutputStream outputStream) {
     }
