@@ -22,6 +22,8 @@ import java.util.concurrent.Executors;
  * on receiving a LOGOUT message, the server will close the socket associated with that thread
  */
 
+
+
 public class Server {
     // List of connected clients
     private static final ArrayList<ConnectedClient> connectedClients = new ArrayList<>();

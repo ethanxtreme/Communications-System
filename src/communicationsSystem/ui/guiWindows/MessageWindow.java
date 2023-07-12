@@ -2,7 +2,7 @@ package communicationsSystem.ui.guiWindows;
 
 import communicationsSystem.model.User;
 import communicationsSystem.model.UserType;
-import communicationsSystem.network.Client;
+import communicationsSystem.network.client.Client;
 
 import javax.swing.*;
 import java.awt.*;
