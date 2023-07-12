@@ -1,8 +1,8 @@
-package communicationsSystem.ui;
+package communicationsSystem.network.client.ui;
 
 import communicationsSystem.network.client.Client;
-import communicationsSystem.ui.guiWindows.LoginWindow;
-import communicationsSystem.ui.guiWindows.MessageWindow;
+import communicationsSystem.network.client.ui.guiWindows.LoginWindow;
+import communicationsSystem.network.client.ui.guiWindows.MessageWindow;
 
 public class GUI {
     static Client client = null;

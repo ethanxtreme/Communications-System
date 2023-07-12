@@ -4,7 +4,7 @@ import communicationsSystem.model.MessageStatus;
 import communicationsSystem.model.MessageType;
 import communicationsSystem.network.NetworkMessage;
 import communicationsSystem.network.client.helpers.ClientNetwork;
-import communicationsSystem.ui.GUI;
+import communicationsSystem.network.client.ui.GUI;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
