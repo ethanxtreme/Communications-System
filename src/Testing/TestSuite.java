@@ -1,4 +1,5 @@
 package Testing;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -7,13 +8,14 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @SuiteClasses({
 
-	UserTest.class,
-	//ChatGroupTester.class,
-	//ChatLogtester.class,
-	//ChatMessagetester.class,
-	//NetworkMessagetester.class,
-	//Threadtester.class
-	
+        UserTest.class,
+        ThreadTest.class
+        //ChatGroupTester.class,
+        //ChatLogtester.class,
+        //ChatMessagetester.class,
+        //NetworkMessagetester.class,
+
+
 })
 public class TestSuite {
 }

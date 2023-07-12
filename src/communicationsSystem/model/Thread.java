@@ -15,8 +15,9 @@ public class Thread {
         numMessages = 0;
     }
 
-    public Thread(ChatMessage[] messages) {
-        chatMessages.addAll(Arrays.asList(messages));
+    public Thread(ChatMessage[] messages, User[] participants) {
+        this.chatMessages.addAll(Arrays.asList(messages));
+        this.participants.addAll(Arrays.asList(participants));
 
         // this will save the current number of messages
         numMessages = chatMessages.size();
