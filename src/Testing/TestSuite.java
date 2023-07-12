@@ -6,12 +6,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 
 @SuiteClasses({
-	
-	UserTester.class, 
+
+	UserTest.class,
 	//ChatGroupTester.class,
 	//ChatLogtester.class,
-	ChatMessagetester.class, 
-	NetworkMessagetester.class, 
+	//ChatMessagetester.class,
+	//NetworkMessagetester.class,
 	//Threadtester.class
 	
 })

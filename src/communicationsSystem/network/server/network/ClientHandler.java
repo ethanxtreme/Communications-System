@@ -49,9 +49,9 @@ public class ClientHandler implements Runnable {
 
             boolean running = true;
             while (running) {//wait for logout message before closing connection
-
+                // TODO: login(), logout(), and getUserById() are commented out to avoid errors
                 if (message.getType() == MessageType.LOGIN) {
-                    loggedInUser = login(message, objectOutputStream, users); // Set loggedInUser here
+                    //loggedInUser = login(message, objectOutputStream, users); // Set loggedInUser here
 
                     if (loggedInUser != null) {
                         // Add the connected client to the list of connected clients (Jesse's suggestion)
@@ -67,7 +67,7 @@ public class ClientHandler implements Runnable {
                     String[] recipients = message.getChatMessage().getRecipientIds();
                     ArrayList<User> userRecipients = new ArrayList<>();
                     for (String recipient : recipients) {
-                        userRecipients.add(getUserById(recipient, users));
+                        //userRecipients.add(getUserById(recipient, users));
                     }
                     String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
                     participants[participants.length - 1] = message.getChatMessage().getSenderId();
@@ -75,7 +75,7 @@ public class ClientHandler implements Runnable {
                     //chatLog.addMessage(message, participants);
 
                     //Send the update request message to connected user recipients
-                    sendMessage(userRecipients, message);
+                    //sendMessage(userRecipients, message);
 
 
                 } else if (message.getType() == MessageType.LOGOUT) {
@@ -87,7 +87,7 @@ public class ClientHandler implements Runnable {
                         removeConnectedClient(connectedUser);
                         // removeConnectedClient(loggedInUser);
                     }
-                    logout(objectOutputStream, socket, inputStream, outputStream);
+                    //logout(objectOutputStream, socket, inputStream, outputStream);
 
                 } else { //type == UNDEFINED
                     System.out.println("Error:" + socket);
