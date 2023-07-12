@@ -1,4 +1,4 @@
-package communicationsSystem.ui.guiWindows;
+package communicationsSystem.network.client.ui.guiWindows;
 
 import communicationsSystem.network.client.Client;
 

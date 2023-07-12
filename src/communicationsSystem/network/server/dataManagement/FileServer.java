@@ -1,4 +1,4 @@
-package communicationsSystem.fileManagement;
+package communicationsSystem.network.server.dataManagement;
 import communicationsSystem.model.ChatMessage;
 import communicationsSystem.model.Thread;
 import communicationsSystem.model.User;
@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.text.ParseException;
 
+// TODO: Implement file management
 public class FileServer {
     
     private static final String USERS_FILE = "src/Users.txt";
@@ -82,7 +83,7 @@ public class FileServer {
 
                     // Set participantIds in the currentThread instance
                     assert currentThread != null;
-                    currentThread.addParticipants(participantIds);
+                    // currentThread.addParticipant(participantIds); TODO: Update logic to add participants to threads
                     
                     // Create a new ChatMessage instance with the parsed fields
                     ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);

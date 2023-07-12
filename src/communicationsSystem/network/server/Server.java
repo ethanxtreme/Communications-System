@@ -1,10 +1,11 @@
-package communicationsSystem.network;
+package communicationsSystem.network.server;
 
-import communicationsSystem.fileManagement.FileServer;
 import communicationsSystem.model.ChatLog;
 import communicationsSystem.model.MessageStatus;
 import communicationsSystem.model.MessageType;
 import communicationsSystem.model.User;
+import communicationsSystem.network.NetworkMessage;
+import communicationsSystem.network.server.dataManagement.FileServer;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -23,15 +24,14 @@ import java.util.concurrent.Executors;
  */
 
 
-
 public class Server {
-    // List of connected clients
-    private static final ArrayList<ConnectedClient> connectedClients = new ArrayList<>();
+    private static final ArrayList<ConnectedClient> connectedClients = new ArrayList<>(); // TODO: Remove once ClientHandler is implemented
 
     /**
      * Runs the sever, spawns new thread with client connection returns to listening
      * limits number of threads via thread pool, set to 100 for now
      */
+    // TODO: Move network related logic to ServerNetwork class
     public static void main(String[] args) throws Exception {
         try (var listener = new ServerSocket(1234)) {
             System.out.println("The Communications Server is running...");
@@ -50,50 +50,27 @@ public class Server {
         }
     }
 
-    public static Boolean authenticate(ArrayList<User> users, String username, String password) {
-        System.out.println("Attempting to authenticate user: " + username + " with password: " + password);
-        for (User user : users) {
-            System.out.println("Comparing with user: " + user.getUsername() + " with password: " + user.getPassword());
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                System.out.println("Authentication successful");
-                return true;
-            }
-        }
-        System.out.println("Authentication failed");
-        return false;
-    }
+    //
 
-    public static void logout(ObjectOutputStream objectOutputStream, Socket socket, InputStream inputStream,
-                              OutputStream outputStream) {
-        NetworkMessage failMessage = new NetworkMessage();
-        failMessage.setStatus(MessageStatus.FAIL);
-        try {
-            objectOutputStream.writeObject(failMessage);
-
-            socket.close();
-            inputStream.close();
-            outputStream.close();
-            System.out.println("Closed: " + socket);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    // TODO: Move logic to ServerNetwork or MessageHandler class
     public static void sendMessage(ArrayList<User> userRecipients, NetworkMessage message) {
         //logic to send messages to connected recipients
         for (ConnectedClient client : connectedClients) {
             for (User recipient : userRecipients) {
                 if (client.user().equals(recipient)) {
-                    ObjectOutputStream sendTo = client.outputStream();
-                    //then send the text in the chatmessage to appropriate users
-                    NetworkMessage messageToSend = new NetworkMessage();
-                    messageToSend.setType(MessageType.TEXT);
-                    messageToSend.setStatus(MessageStatus.SUCCESS);
-                    messageToSend.setText(message.getChatMessage().getMessageText());
-                    try {
-                        sendTo.writeObject(messageToSend);
+                    try (ObjectOutputStream sendTo = client.outputStream()) {
+                        //then send the text in the chatmessage to appropriate users
+                        NetworkMessage messageToSend = new NetworkMessage();
+                        messageToSend.setType(MessageType.TEXT);
+                        messageToSend.setStatus(MessageStatus.SUCCESS);
+                        messageToSend.setText(message.getChatMessage().getMessageText());
+                        try {
+                            sendTo.writeObject(messageToSend);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
                 }
             }
@@ -101,6 +78,8 @@ public class Server {
 
     }
 
+    // TODO: Move logic to LoginManager class
+    // need to implement a new way to do this
     public static User login(NetworkMessage message, ObjectOutputStream objectOutputStream, ArrayList<User> users) throws IOException {
         String credentials = message.getLoginCredentials();
         String[] fields = credentials.split("::"); //stored as: username::password
@@ -125,6 +104,40 @@ public class Server {
         }
     }
 
+    // TODO: Move logic to LoginManager class
+    // need to implement a new way to do this
+    public static Boolean authenticate(ArrayList<User> users, String username, String password) {
+        System.out.println("Attempting to authenticate user: " + username + " with password: " + password);
+        for (User user : users) {
+            System.out.println("Comparing with user: " + user.getUsername() + " with password: " + user.getPassword());
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                System.out.println("Authentication successful");
+                return true;
+            }
+        }
+        System.out.println("Authentication failed");
+        return false;
+    }
+
+    // TODO: Move logic to LoginManager class
+    // need to implement a new way to do this
+    public static void logout(ObjectOutputStream objectOutputStream, Socket socket, InputStream inputStream,
+                              OutputStream outputStream) {
+        NetworkMessage failMessage = new NetworkMessage();
+        failMessage.setStatus(MessageStatus.FAIL);
+        try {
+            objectOutputStream.writeObject(failMessage);
+
+            socket.close();
+            inputStream.close();
+            outputStream.close();
+            System.out.println("Closed: " + socket);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // TODO: Decide if needed, if not delete
     public static User getUserByUsername(String username, ArrayList<User> users) {
         for (User user : users) {
             if (user.getUsername().equals(username)) {
@@ -134,6 +147,7 @@ public class Server {
         return null;
     }
 
+    // TODO: Decide if needed, if not delete
     public static User getUserById(String userId, ArrayList<User> users) {
         for (User user : users) {
             if (user.getId().equals(userId)) {
@@ -143,6 +157,7 @@ public class Server {
         return null;
     }
 
+    // TODO: Move logic to ClientHandler class
     private static class CommunicationsServer implements Runnable {
         private final Socket socket;
         private final ArrayList<User> users;
@@ -206,7 +221,7 @@ public class Server {
                         String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
                         participants[participants.length - 1] = message.getChatMessage().getSenderId();
                         //update the chatlog with new message
-                        chatLog.addMessage(message, participants);
+                        //chatLog.addMessage(message, participants);
 
                         //Send the update request message to connected user recipients
                         sendMessage(userRecipients, message);
@@ -241,6 +256,7 @@ public class Server {
         }
     }
 
+    // TODO: Figure out how this will be used
     public record ConnectedClient(User user, ObjectOutputStream outputStream) {
     }
 }
