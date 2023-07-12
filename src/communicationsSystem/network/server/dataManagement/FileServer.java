@@ -86,8 +86,8 @@ public class FileServer {
                     // currentThread.addParticipant(participantIds); TODO: Update logic to add participants to threads
                     
                     // Create a new ChatMessage instance with the parsed fields
-                    ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);
-                    currentThread.addMessage(chatMessage);
+                    //ChatMessage chatMessage = new ChatMessage(messageId, senderId, recipientIds, messageText, timeStamp);
+                    //currentThread.addMessage(chatMessage);
 
                     // Add the thread to the User objects
                     // Find the sender and add the currentThread to their threads list if not already present
@@ -145,8 +145,8 @@ public class FileServer {
                 StringBuilder messages = new StringBuilder();
                 for (ChatMessage message : thread.getThread()) {
                     messages.append(message.getMessageId()).append(",")
-                            .append(message.getSenderId()).append(",")
-                            .append(String.join(";", message.getRecipientIds())).append(",")
+                            //.append(message.getSenderId()).append(",")
+                            //.append(String.join(";", message.getRecipientIds())).append(",")
                             .append(message.getMessageText()).append(",")
                             .append(dateFormat.format(message.getTimeStamp())).append("|");
                 }

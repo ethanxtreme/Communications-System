@@ -18,13 +18,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class ThreadTest {
 
     private Thread thread;
+    // Create some sample users
+    User user1 = new User("id1", "John", UserType.USER, "password123");
+    User user2 = new User("id2", "Jane", UserType.USER, "pass456");
+    User user3 = new User("id3", "Bob", UserType.USER, "pass789");
+
 
     @Before
     public void setUp() {
+        ArrayList<User> recipients = new ArrayList<>();
+        recipients.add(user2);
+        recipients.add(user3);
+
         // Create some initial ChatMessages and Users
         ChatMessage[] messages = {
-                new ChatMessage("1", "user1", new String[]{"user2"}, "Hello", null),
-                new ChatMessage("2", "user2", new String[]{"user1"}, "Hi", null)
+                new ChatMessage("1", user1, recipients, "Hello", null),
+                new ChatMessage("2", user2, recipients, "Hi", null)
         };
         User[] participants = {
                 new User("id1", "user1", UserType.USER, "password1"),
@@ -44,10 +53,13 @@ public class ThreadTest {
 
     @Test
     public void constructor() {
+        ArrayList<User> recipients = new ArrayList<>();
+        recipients.add(user2);
+        recipients.add(user3);
         // Create some ChatMessages and Users
         ChatMessage[] messages = {
-                new ChatMessage("1", "John", new String[]{"Jane"}, "Hello, Jane!", null),
-                new ChatMessage("2", "Jane", new String[]{"John"}, "Hi, John!", null)
+                new ChatMessage("1", user1, recipients, "Hello, Jane!", null),
+                new ChatMessage("2", user1, recipients, "Hi, John!", null)
         };
         User[] participants = {
                 new User("id1", "John", UserType.USER, "password123"),
@@ -70,6 +82,9 @@ public class ThreadTest {
 
     @Test
     public void testGetThread() {
+        ArrayList<User> recipients = new ArrayList<>();
+        recipients.add(user2);
+        recipients.add(user3);
         // Get the thread from the thread object
         ArrayList<ChatMessage> chatMessages = thread.getThread();
 
@@ -77,8 +92,8 @@ public class ThreadTest {
         assertEquals(2, chatMessages.size());
 
         // Check each ChatMessage object in the list
-        ChatMessage expectedMsg1 = new ChatMessage("1", "user1", new String[]{"user2"}, "Hello", null);
-        ChatMessage expectedMsg2 = new ChatMessage("2", "user2", new String[]{"user1"}, "Hi", null);
+        ChatMessage expectedMsg1 = new ChatMessage("1", user1, recipients, "Hello", null);
+        ChatMessage expectedMsg2 = new ChatMessage("2", user2, recipients, "Hi", null);
 
         boolean containsExpectedMsg1 = false;
         boolean containsExpectedMsg2 = false;
@@ -123,20 +138,20 @@ public class ThreadTest {
     }
 
     @Test
-    public void addMessage() {
-        boolean trueBool = true;
-        boolean falseBool = false;
-        ArrayList<ChatMessage> holdTestMessage = new ArrayList<>();
-        String[] testRecipientIDs = {"a", "b", "c"};
-        Date test_date = new Date();
-        ChatMessage test_message = new ChatMessage("123", "efgh", testRecipientIDs, "Hello", test_date);
-        holdTestMessage.add(test_message);
-        if (holdTestMessage.contains(test_message)) {
-            assertTrue(trueBool);
-        } else {
-            assertFalse(falseBool);
-        }
+    public void testAddMessage() {
+        User user1 = new User("id1", "John", UserType.USER, "password123");
+        User user2 = new User("id2", "Jane", UserType.USER, "pass456");
+        User user3 = new User("id3", "Bob", UserType.USER, "pass789");
+        ArrayList<User> localParticipants = new ArrayList<>();
+        localParticipants.add(user2);
+        localParticipants.add(user3);
 
+        Date testDate = new Date();
+        ChatMessage localTestMessage = new ChatMessage("123", user1, localParticipants, "Hello", testDate);
+
+        thread.addMessage(localTestMessage);
+
+        assertTrue(thread.getThread().contains(localTestMessage));
     }
 
     @Test

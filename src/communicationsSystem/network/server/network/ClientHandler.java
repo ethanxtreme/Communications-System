@@ -8,7 +8,6 @@ import communicationsSystem.network.NetworkMessage;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ClientHandler implements Runnable {
     private static final ArrayList<ConnectedClient> connectedClients = new ArrayList<>();
@@ -37,8 +36,18 @@ public class ClientHandler implements Runnable {
         try {
 
             // Output stream socket
-            OutputStream outputStream = socket.getOutputStream();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            OutputStream outputStream = null;
+            try {
+                outputStream = socket.getOutputStream();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            ObjectOutputStream objectOutputStream = null;
+            try {
+                objectOutputStream = new ObjectOutputStream(outputStream);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
             // Input stream socket
             InputStream inputStream = socket.getInputStream();
@@ -64,21 +73,21 @@ public class ClientHandler implements Runnable {
                 } else if (message.getType() == MessageType.TEXT) {
 
                     // Get the recipient list from the message
-                    String[] recipients = message.getChatMessage().getRecipientIds();
+                    //String[] recipients = message.getChatMessage().getRecipientIds();
                     ArrayList<User> userRecipients = new ArrayList<>();
-                    for (String recipient : recipients) {
-                        //userRecipients.add(getUserById(recipient, users));
-                    }
-                    String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
-                    participants[participants.length - 1] = message.getChatMessage().getSenderId();
-                    //update the chatlog with new message
-                    //chatLog.addMessage(message, participants);
+                    //for (String recipient : recipients) {
+                    //userRecipients.add(getUserById(recipient, users));
+                }
+                //String[] participants = Arrays.copyOf(recipients, recipients.length + 1);
+                //participants[participants.length - 1] = message.getChatMessage().getSenderId();
+                //update the chatlog with new message
+                //chatLog.addMessage(message, participants);
 
-                    //Send the update request message to connected user recipients
-                    //sendMessage(userRecipients, message);
+                //Send the update request message to connected user recipients
+                //sendMessage(userRecipients, message);
 
 
-                } else if (message.getType() == MessageType.LOGOUT) {
+                else if (message.getType() == MessageType.LOGOUT) {
                     running = false;
                     // Close the connection with the client if they log out of the system
                     if (loggedInUser != null) {
@@ -93,21 +102,18 @@ public class ClientHandler implements Runnable {
                     System.out.println("Error:" + socket);
                 }
                 message = (NetworkMessage) objectInputStream.readObject(); //wait for next incoming message
-            }
 
-        } catch (Exception e) {
-            System.out.println("Error:" + socket);
-        } finally {
-            try {
-                socket.close();
-            } catch (IOException ignored) {
             }
-            System.out.println("Closed: " + socket);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
+
     // TODO: Figure out how this will be used
-    public record ConnectedClient(User user, ObjectOutputStream outputStream) {
+    record ConnectedClient(User user, ObjectOutputStream outputStream) {
     }
 }
 

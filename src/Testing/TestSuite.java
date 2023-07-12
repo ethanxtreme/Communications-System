@@ -9,10 +9,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 
         UserTest.class,
-        ThreadTest.class
+        ThreadTest.class,
+        ChatMessageTest.class,
         //ChatGroupTester.class,
         //ChatLogtester.class,
-        //ChatMessagetester.class,
         //NetworkMessagetester.class,
 
 
