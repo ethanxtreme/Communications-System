@@ -1,6 +1,6 @@
 package communicationsSystem.ui;
 
-import communicationsSystem.network.Client;
+import communicationsSystem.network.client.Client;
 import communicationsSystem.ui.guiWindows.LoginWindow;
 import communicationsSystem.ui.guiWindows.MessageWindow;
 
