@@ -34,7 +34,7 @@ public class Client {
 
         clientNetwork = new ClientNetwork(client);
 
-        // TODO Need to figure out GUI calling logic
+        // TODO: Need to figure out GUI calling logic
         GUI gui = new GUI("login", false, client);
         client.setGUI(gui);
 
